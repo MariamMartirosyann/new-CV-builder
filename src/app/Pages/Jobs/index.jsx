@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addContactInfo } from "../../Redux/ContactInfoSlice";
+import { addJobsInfo } from "../../Redux/JobsSlice";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import { Typography, Grid, Box } from "@mui/material";
 import "./style.css";
@@ -25,16 +25,18 @@ const Jobs = () => {
     },
   });
 
+  
+  const onSubmit = (formData1) => {
+    dispatch(addJobsInfo(formData1));
+   navigate("/experience")
+  };
+
   const {
     formState: { errors },
     handleSubmit,
     control,
   } = methods;
-  const onSubmit = (formData) => {
-    console.log(formData);
-    dispatch(addContactInfo(formData));
-   navigate( navigate("/experience"))
-  };
+
   return (
     <div className="contactInfo">
       <Sidebar />

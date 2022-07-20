@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Typography, Grid } from "@mui/material";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import { ReactComponent as Delete } from "../../../icons/delete.svg";
@@ -7,13 +8,13 @@ import { ReactComponent as Edit } from "../../../icons/edit.svg";
 import "./style.css";
 
 const Experience = () => {
-  const info = useSelector((state) => state.contactInfo.list);
-  console.log("info", info);
+  const list = useSelector((state) => state.jobsInfo.list);
+  
   return (
     <>
       <Sidebar />
       <div className="contactInfo">
-        {" "}
+        
         <Typography
           variant="h3"
           style={{ marginLeft: "0", marginTop: "30px", marginBottom: "15px" }}
@@ -38,24 +39,28 @@ const Experience = () => {
         >
           Experience
         </Typography>
-        <Grid className="container" spacing={3}>
+        {/* <Grid className="container">
           <Grid className="item1">
-          <Typography
-          variant="h6"
-          style={{ marginLeft: "0"}}
-        >
-          Experience 1
-        </Typography>
-            {" "}
-            Lorem, ipsum dolor sit amet consectetur adipisia qui dolore iure
-            mollitia perferendis facere voluptatum perspiciatis.
+            <Typography variant="h6" style={{ marginLeft: "0" }}>
+              {position}
+            </Typography>
+            {company}{startDate}-{endDate}
           </Grid>
           <Grid className="item2">
-            <Delete /> &nbsp; 
-            <Edit />
+            <Link to="/experienceJobs">
+              {" "}
+              <Edit />
+            </Link>
+            &nbsp;
+            <Delete />
           </Grid>
-        </Grid>
-        <button className="add"> + Add Another</button>
+        </Grid> */}
+         
+        {/* <Link to="/experienceJobs"> */}
+          <button className="add"  > + Add Another</button>
+          {list.map((item) => <Typography key={item.id}>{item.name}</Typography>)}
+       
+        {/* </Link> */}
       </div>
     </>
   );
