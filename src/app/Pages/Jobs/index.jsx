@@ -1,35 +1,49 @@
 import React from "react";
 import Input from "../../Shared/Input";
+import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addJobsInfo } from "../../Redux/JobsSlice";
+import { updateJobsInfo } from "../../Redux/JobsSlice";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import { Typography, Grid, Box } from "@mui/material";
 import "./style.css";
+import { nanoid } from "nanoid";
 
 const Jobs = () => {
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   const methods = useForm({
     defaultValues: {
-        position: "",
-        company:"",
-        location:"",
-        startDate:"",
-        endDate:"",
-
+      position: "",
+      company: "",
+      location: "",
+      startDate: "",
+      endDate: "",
     },
   });
-
-  
-  const onSubmit = (formData1) => {
-    dispatch(addJobsInfo(formData1));
-   navigate("/experience")
+  const onSubmit = (formData) => {
+    const newData = {
+      id: nanoid(),
+      position: formData.position,
+      company: formData.company,
+      location: formData.location,
+      startDate: formData.startDate,
+      endDate: formData.endDate,
+    };
+    dispatch(
+      updateJobsInfo({newData})
+    );
+    navigate("/experience");
   };
+
+  /*const onSubmit = (formData1) => {
+    dispatch(addContactInfo(formData1));
+   navigate("/experience")
+  };*/
 
   const {
     formState: { errors },
@@ -60,7 +74,7 @@ const Jobs = () => {
       </Typography>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} className="formStyle">
-        <Grid container spacing={2}>
+          <Grid container spacing={2}>
             <Grid item lg={3}>
               {" "}
               <Box style={{ marginTop: "30px" }}>
@@ -85,8 +99,8 @@ const Jobs = () => {
                 />
               </Box>
             </Grid>
-            <Grid item lg={3}> 
-            <Box style={{ marginTop: "30px" }}>
+            <Grid item lg={3}>
+              <Box style={{ marginTop: "30px" }}>
                 <Input
                   name="company"
                   control={control}
@@ -107,10 +121,9 @@ const Jobs = () => {
                   }}
                 />
               </Box>
-              
             </Grid>
           </Grid>
-          <Box style={{ width: "50%", marginTop: "20px"}}>
+          <Box style={{ width: "50%", marginTop: "20px" }}>
             <Input
               name="location"
               control={control}
@@ -132,7 +145,6 @@ const Jobs = () => {
             />
           </Box>
           <Grid container spacing={2}>
-
             <Grid item lg={3}>
               {" "}
               <Box style={{ marginTop: "20px" }}>
@@ -157,8 +169,8 @@ const Jobs = () => {
                 />
               </Box>
             </Grid>
-            <Grid item lg={3}> 
-            <Box style={{ marginTop: "20px" }}>
+            <Grid item lg={3}>
+              <Box style={{ marginTop: "20px" }}>
                 <Input
                   name="endDate"
                   control={control}
@@ -179,10 +191,9 @@ const Jobs = () => {
                   }}
                 />
               </Box>
-              
             </Grid>
           </Grid>
-          <Box style={{ width: "50%", marginTop: "20px"}}>
+          <Box style={{ width: "50%", marginTop: "20px" }}>
             <Input
               name="description"
               control={control}
@@ -191,7 +202,7 @@ const Jobs = () => {
               color={"primary"}
               helperText={"Enter description"}
               errors={errors}
-              style={{height:"200px"}}
+              style={{ height: "200px" }}
               rules={{
                 required: {
                   value: true,
@@ -204,7 +215,7 @@ const Jobs = () => {
               }}
             />
           </Box>
-          <input type="submit" style={{margin:"20px 0"}}  className="btn"/>
+          <input type="submit" style={{ margin: "20px 0" }} className="btn" />
         </form>
       </FormProvider>
     </div>

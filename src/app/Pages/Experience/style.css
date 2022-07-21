@@ -20,6 +20,7 @@
   flex-direction: row;
   align-items: center;
   padding: 5px 10px;
+  margin-top:20px;
 }
 .item1 {
   width: 90%;

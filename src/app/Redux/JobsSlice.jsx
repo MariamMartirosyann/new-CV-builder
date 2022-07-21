@@ -8,12 +8,36 @@ const jobsSlice = createSlice({
   name: "jobsInfo",
   initialState,
   reducers: {
-    addJobsInfo: (state, { payload }) => {
-      state.list = payload;
+    addJobsInfo: (state, action) => {
+      const newItem = {
+        id:action.payload.id,
+        position: action.payload.position,
+        location:action.payload.location,
+        company: action.payload.company,
+        startDate: action.payload.startDate,
+        endDate: action.payload.endDate,
+      };
+      const newList = [...state.list, newItem];
+      state.list = newList;
     },
+    updateJobsInfo: (state, { payload }) => {
+      const newList = state.list.map((item, id) => {
+        if (item.id === payload.id) {
+        return payload;
+      }
+        return item
+      });
+      console.log(newList,payload,"aaaaa");
+      state.list=newList
+    },
+    deleteJobsInfo:(state,{payload})=>{
+      state.list=[
+      ...state.list.filter((item)=>item.id!==payload.id)
+    ]
+  }
   },
 });
 
-export const { addJobsInfo } = jobsSlice.actions;
+export const { addJobsInfo, updateJobsInfo, deleteJobsInfo } = jobsSlice.actions;
 
 export default jobsSlice.reducer;
