@@ -7,6 +7,7 @@ import Education from "./app/Pages/Education/Education";
 import Skills from "./app/Pages/Skills/Skills";
 import Languages from "./app/Pages/Languages/Languages";
 import Jobs from "./app/Pages/Jobs";
+import JobsEdit from "./app/Pages/JobsEdit";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           <Routes>
             <Route path="/" element={<ContactInfo />} />
             <Route path="experience" element={<Experience />} />
-            <Route path="experienceJobs/:id" element={<Jobs />} />
+            <Route path="experienceJobs/add" element={<Jobs />} />
+            <Route path="experienceJobsEdit/:id" element={<JobsEdit />} />
             <Route path="education" element={<Education />} />
             <Route path="skills" element={<Skills />} />
             <Route path="languages" element={<Languages />} />

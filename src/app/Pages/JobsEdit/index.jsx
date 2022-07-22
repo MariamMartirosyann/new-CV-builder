@@ -1,20 +1,23 @@
-import React from "react";
+import React, {useEffect } from "react";
 import Input from "../../Shared/Input";
+import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FormProvider } from "react-hook-form";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { addJobsInfo } from "../../Redux/JobsSlice";
+import { updateJobsInfo} from "../../Redux/JobsSlice";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import { Typography, Grid, Box } from "@mui/material";
 import "./style.css";
-import { nanoid } from "nanoid";
 
-const Jobs = () => {
+const JobsEdit = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
+  
   const { id } = useParams();
+  const jobs = useSelector((state) => state.jobsInfo.list);
+  const selectedJob = jobs.find((item) => item.id === id);
 
   const methods = useForm({
     defaultValues: {
@@ -27,22 +30,41 @@ const Jobs = () => {
   });
   const onSubmit = (formData1) => {
     const newFormData = {
-      id: nanoid(),
-      position: formData1.position,
-      company: formData1.company,
-      location: formData1.location,
-      startDate: formData1.startDate,
-      endDate: formData1.endDate,
-    };
-    dispatch(addJobsInfo(newFormData));
+        id: id,
+        position: formData1.position,
+        company: formData1.company,
+        location: formData1.location,
+        startDate: formData1.startDate,
+        endDate: formData1.endDate,
+      };
+    dispatch(
+        updateJobsInfo(newFormData)
+    );
     navigate("/experience");
   };
+
 
   const {
     formState: { errors },
     handleSubmit,
+    reset,
     control,
   } = methods;
+
+  
+console.log(selectedJob,"selectedJob");
+  useEffect(() => {
+    if (selectedJob) {
+      reset({
+        position: selectedJob.position,
+        company: selectedJob.company,
+        number: selectedJob.number,
+        location: selectedJob.location,
+        startDate: selectedJob.startDate,
+        endDate: selectedJob.endDate,
+      });
+    }
+  }, [reset, selectedJob]);
 
   return (
     <div className="contactInfo">
@@ -51,7 +73,7 @@ const Jobs = () => {
         variant="h3"
         style={{ marginLeft: "0", marginTop: "30px", marginBottom: "15px" }}
       >
-        Great! Let's fill out your work experience next
+        Great! Let's edit your work experience {id}
       </Typography>
       <Typography
         variant="p"
@@ -215,4 +237,4 @@ const Jobs = () => {
   );
 };
 
-export default Jobs;
+export default JobsEdit;

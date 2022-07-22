@@ -20,6 +20,9 @@ const jobsSlice = createSlice({
       const newList = [...state.list, newItem];
       state.list = newList;
     },
+    addDiv:(state, { payload }) => {
+      state.list = payload;
+    },
     updateJobsInfo: (state, { payload }) => {
       const newList = state.list.map((item, id) => {
         if (item.id === payload.id) {
@@ -27,7 +30,6 @@ const jobsSlice = createSlice({
       }
         return item
       });
-      console.log(newList,payload,"aaaaa");
       state.list=newList
     },
     deleteJobsInfo:(state,{payload})=>{
@@ -38,6 +40,6 @@ const jobsSlice = createSlice({
   },
 });
 
-export const { addJobsInfo, updateJobsInfo, deleteJobsInfo } = jobsSlice.actions;
+export const { addJobsInfo, addDiv, updateJobsInfo, deleteJobsInfo } = jobsSlice.actions;
 
 export default jobsSlice.reducer;
