@@ -8,6 +8,7 @@ import Skills from "./app/Pages/Skills/Skills";
 import Languages from "./app/Pages/Languages/Languages";
 import Jobs from "./app/Pages/Jobs";
 import JobsEdit from "./app/Pages/JobsEdit";
+import PreWritten from "./app/Pages/PreWritten";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="experienceJobsEdit/:id" element={<JobsEdit />} />
             <Route path="education" element={<Education />} />
             <Route path="skills" element={<Skills />} />
+            <Route path="preWritten" element={<PreWritten />} />
             <Route path="languages" element={<Languages />} />
           </Routes>
         </BrowserRouter>

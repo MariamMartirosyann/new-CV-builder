@@ -1,14 +1,35 @@
-.contactInfo{
-    margin: 0 120px;
+.contactInfo {
+  margin: 0 120px;
 }
-.btn{
-    
-    border-radius: 30%;
-    width:200px;
-    height: 50px;
-    background-color: brown;
-    padding:  15px 3px;
-    color: white;
-    font-size: 18px;
-    border: 1px solid brown;
+
+.submit {
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgba(170, 188, 188, 0.5);
+  padding-left: 15px;
+  position: absolute;
+  right: 0;
+  margin: 10px;
+  border: none;
+}
+.skills {
+  width: 200px;
+  height: 50px;
+  background-color: rgb(103, 103, 241);
+  border-radius: 50px;
+  margin: 20px 5px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.skills:hover .close {
+  display: inline-block;
+}
+
+.close {
+  margin-left: 10px;
+  margin-right: 0;
+  display: none;
 }

@@ -1,0 +1,31 @@
+.preWritten {
+  color: black;
+  width: 40%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  padding: 5px;
+  margin: 30px;
+  padding: 30px;
+  text-align: center;
+}
+.title {
+  color: black;
+}
+.searchDiv {
+  position: relative;
+}
+.searchBar {
+  width: 50%;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 25%;
+  padding: 15px;
+}
+.title1{
+    position: absolute;
+    left:25%;
+    color: grey;
+}
