@@ -24,8 +24,21 @@
   right: 25%;
   padding: 15px;
 }
-.title1{
-    position: absolute;
-    left:25%;
-    color: grey;
+.title1 {
+  position: absolute;
+  left: 25%;
+  color: grey;
+}
+.preWrittenDiv {
+  width: 50%;
+  height: 50px;
+  padding-top: 18px;
+  padding-left: 30px;
+  border: 1px solid grey;
+  color: grey;
+  margin: 20px auto;
+  text-align: start;
+}
+.preWrittenIcon:hover {
+  color: aqua;
 }
