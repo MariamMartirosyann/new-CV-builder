@@ -2,13 +2,12 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Typography, Grid } from "@mui/material";
-import { addJobsInfo } from "../../Redux/JobsSlice";
 import { deleteJobsInfo } from "../../Redux/JobsSlice";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import { ReactComponent as Delete } from "../../../icons/delete.svg";
 import { ReactComponent as Edit } from "../../../icons/edit.svg";
-import { nanoid } from "nanoid";
 import "./style.css";
+import InputSubmit from "../../Shared/InputSubmit";
 
 const Experience = () => {
   const navigate = useNavigate();
@@ -27,6 +26,7 @@ const Experience = () => {
 
   return (
     <>
+    
     {(list.length===0)?( <div style={{display:"flex", flexDirection:"column"}}>
         <div>
           <Sidebar />
@@ -108,8 +108,8 @@ const Experience = () => {
           </div>
         </div>
         <div  className="btnDiv">
-          <Link to="/skills">
-            <input type="submit" style={{ margin: "20px 0" }} className="btn" />
+          <Link to="/skills-languages">
+         <InputSubmit/>
           </Link>
         </div>
       </div>):( <div style={{display:"flex", flexDirection:"column"}}>
@@ -178,8 +178,8 @@ const Experience = () => {
           </div>
         </div>
         <div  className="btnDiv">
-          <Link to="/skills">
-            <input type="submit" style={{ margin: "20px 0" }} className="btn" />
+          <Link to="/skills-languages">
+            <InputSubmit/>
           </Link>
         </div>
       </div>)}
@@ -189,4 +189,4 @@ const Experience = () => {
 };
 
 export default Experience;
-// {list.map((item) => <Typography key={item.id}>{item.name}</Typography>)}
+

@@ -1,18 +1,7 @@
 .contactInfo {
   margin: 0 120px;
 }
-.btn {
-  border-radius: 30%;
-  width: 300px;
-  height: 50px;
-  background-color: brown;
-  padding: 15px 3px;
-  color: white;
-  font-size: 18px;
-  border: 1px solid brown;
-  display:"flex";
-  
-}
+
 .container {
   width: 55%;
   height: 100px;

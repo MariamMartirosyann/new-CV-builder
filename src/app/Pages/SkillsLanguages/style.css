@@ -33,3 +33,24 @@
   margin-right: 0;
   display: none;
 }
+.container {
+  width: 50%;
+  height: 70px;
+  border: 1px solid grey;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom:10px;
+  margin-top:20px;
+}
+.add {
+  width: 50%;
+  height: 70px;
+  border: 1px solid grey;
+  background: white;
+  color: rgba(59, 59, 239, 0.4);
+  border: 1px solid rgba(59, 59, 239, 0.4);
+  margin-top: 35px;
+  font-size: 24px;
+}

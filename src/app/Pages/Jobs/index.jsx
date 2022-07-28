@@ -10,6 +10,7 @@ import Sidebar from "../../Shared/Sidebar/Sidebar";
 import { Typography, Grid, Box } from "@mui/material";
 import "./style.css";
 import { nanoid } from "nanoid";
+import InputSubmit from "../../Shared/InputSubmit";
 
 const Jobs = () => {
   const dispatch = useDispatch();
@@ -208,7 +209,7 @@ const Jobs = () => {
               }}
             />
           </Box>
-          <input type="submit" style={{ margin: "20px 0" }} className="btn" />
+          <InputSubmit/>
         </form>
       </FormProvider>
     </div>

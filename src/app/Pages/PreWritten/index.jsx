@@ -1,19 +1,27 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Typography, TextField } from "@mui/material";
-import { addSkills, deleteSkills } from "../../Redux/SkillsSlice";
+import SkillsSlice, { addSkills, deleteSkills } from "../../Redux/SkillsSlice";
+import { preWrittenTextState } from "../../Redux/PreWrittenSlice";
 import { ReactComponent as Close1 } from "../../../icons/close1.svg";
 import { ReactComponent as Papers } from "../../../icons/papers.svg";
 import { ReactComponent as Search } from "../../../icons/search.svg";
 import { ReactComponent as Add1 } from "../../../icons/add1.svg";
 import { ReactComponent as Done } from "../../../icons/done.svg";
 import "./style.css";
+import Sidebar from "../../Shared/Sidebar/Sidebar";
 
 const PreWritten = () => {
   const dispatch = useDispatch();
   const list = useSelector((state) => state.preWrittenInfo.list);
+  const listNew = useSelector((state) => state.skillsInfo.list);
+  const state = useSelector(
+    (state) => state.preWrittenInfo.showPreWrittenText
+  );
+
+  console.log("state",state)
   console.log("listt", list);
-  const [isAdd, setIsAdd] = useState(list.find((item) => item.id === list.id));
+  console.log("Newlistt", listNew);
 
   const handleAdd = (item) => {
     const newFormData = {
@@ -21,53 +29,56 @@ const PreWritten = () => {
       skills: item.skills,
     };
     dispatch(addSkills(newFormData));
-    setIsAdd(true);
   };
   const handleDelete = (item) => {
     dispatch(deleteSkills({ id: item.id }));
-    setIsAdd(false);
   };
+  const handleClose = ()=>{
+    dispatch(preWrittenTextState(false))
+  }
 
   return (
-    <div className="preWritten">
-      <Typography variant="h5" className="title">
-        <Papers /> Pre-written phrases  <Close1 style={{ marginLeft: "70px" }} />
-      </Typography>
-      <Typography variant="p" className="title">
-        Find, add, and edit phrases for your profession.
-      </Typography>
-      <br />
-      <br />
-      <div className="searchDiv">
-        {" "}
-        <TextField className="searchBar" helperText="Search" />{" "}
-        <Search className="searchIcon" />
-      </div>
-
-      <div style={{ position: "relative", marginTop: "20px" }}>
-        {" "}
-        <Typography variant="p" className="title1">
-          COMMON PHRASES
+    <>
+      <div className="preWritten">
+        <Typography variant="h5" className="title">
+          <Papers /> Pre-written phrases{" "}
+          <Close1 style={{ marginLeft: "70px" }}  onClick={handleClose}/>
+        </Typography>
+        <Typography variant="p" className="title">
+          Find, add, and edit phrases for your profession.
         </Typography>
         <br />
         <br />
-        {list.map((i) => (
-          <div key={i.id} className="preWrittenDiv">
-            {isAdd ? (
-              <Done onClick={(e) => handleDelete(i, e)} />
-            ) : (
-              <Add1
-                className="preWrittenIcon"
-                onClick={(e) => handleAdd(i, e)}
-              />
-            )}{" "}
-            &nbsp; {i.skills}
-          </div>
-        ))}
+        <div className="searchDiv">
+          {" "}
+          <TextField className="searchBar" helperText="Search" />{" "}
+          <Search className="searchIcon" />
+        </div>
+
+        <div style={{ position: "relative", marginTop: "20px" }}>
+          {" "}
+          <Typography variant="p" className="title1">
+            COMMON PHRASES
+          </Typography>
+          <br />
+          <br />
+          {list.map((i) => (
+            <div key={i.id} className="preWrittenDiv">
+              {listNew.find((item) => item.id === i.id) ? (
+                <Done onClick={(e) => handleDelete(i, e)} />
+              ) : (
+                <Add1
+                  className="preWrittenIcon"
+                  onClick={(e) => handleAdd(i, e)}
+                />
+              )}
+              &nbsp; {i.skills}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default PreWritten;
-//{isAdd?(<Done onClick={(e)=>handleDelete (i,e)}/>):(<Add1 className="preWrittenIcon" onClick={(e)=>handleAdd(i,e)}/>)}
+export default PreWritten

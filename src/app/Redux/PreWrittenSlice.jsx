@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const preWrittenText = [
-  { id: 1, skills: "NLP" },
+
   { id: 2, skills: "Teamwork" },
   { id: 3, skills: "Problem-Solving" },
   { id: 4, skills: "Customer-Service" },
@@ -16,6 +16,7 @@ export const preWrittenText = [
 
 const initialState = {
   list: preWrittenText,
+  showPreWrittenText: false,
 };
 
 const preWrittenSlice = createSlice({
@@ -33,8 +34,11 @@ const preWrittenSlice = createSlice({
     deletePreWritten: (state, { payload }) => {
       state.list = [...state.list.filter((item) => item.id !== payload.id)];
     },
+    preWrittenTextState:(state,{payload})=>{
+      state.showPreWrittenText = payload
+    }
   },
 });
-export const {  addPreWritten, deletePreWritten } = preWrittenSlice.actions;
+export const {  addPreWritten, deletePreWritten,preWrittenTextState } = preWrittenSlice.actions;
 
 export default preWrittenSlice.reducer;

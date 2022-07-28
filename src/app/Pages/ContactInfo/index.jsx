@@ -6,9 +6,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {addContactInfo} from "../../Redux/ContactInfoSlice"
 import { Box, Typography, Grid } from "@mui/material";
-
-import "./style.css";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
+import InputSubmit from "../../Shared/InputSubmit";
+import "./style.css";
 
 
 
@@ -279,7 +279,7 @@ const ContactInfo = () => {
               }}
             />
           </Box>
-          <input type="submit" style={{margin:"20px 0"}}  className="btn"/>
+          <InputSubmit/>
         
         </form>
       </FormProvider>

@@ -9,6 +9,7 @@ import { updateJobsInfo} from "../../Redux/JobsSlice";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import { Typography, Grid, Box } from "@mui/material";
 import "./style.css";
+import InputSubmit from "../../Shared/InputSubmit";
 
 const JobsEdit = () => {
   const dispatch = useDispatch();
@@ -230,7 +231,7 @@ console.log(selectedJob,"selectedJob");
               }}
             />
           </Box>
-          <input type="submit" style={{ margin: "20px 0" }} className="btn" />
+         <InputSubmit/>
         </form>
       </FormProvider>
     </div>

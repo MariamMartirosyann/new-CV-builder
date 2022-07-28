@@ -3,6 +3,7 @@ import contactInfoReducer from "./ContactInfoSlice";
 import jobsInfoReducer from "./JobsSlice";
 import skillsInfoReducer from "./SkillsSlice";
 import preWrittenInfoReducer from "./PreWrittenSlice";
+import languagesInfoReducer from "./LanguagesSlice"
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     jobsInfo: jobsInfoReducer,
     skillsInfo: skillsInfoReducer,
     preWrittenInfo: preWrittenInfoReducer,
+    languagesInfo:languagesInfoReducer,
   },
 });

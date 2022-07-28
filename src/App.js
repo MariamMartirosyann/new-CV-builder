@@ -4,17 +4,18 @@ import "./App.css";
 import ContactInfo from "./app/Pages/ContactInfo";
 import Experience from "./app/Pages/Experience/Experience";
 import Education from "./app/Pages/Education/Education";
-import Skills from "./app/Pages/Skills/Skills";
-import Languages from "./app/Pages/Languages/Languages";
+import SkillsLanguages from "./app/Pages/SkillsLanguages/SkillsLanguages";
 import Jobs from "./app/Pages/Jobs";
 import JobsEdit from "./app/Pages/JobsEdit";
-import PreWritten from "./app/Pages/PreWritten";
+import LanguagesAdd from "./app/Pages/Languages/LanguagesAdd";
+import LanguagesEdit from "./app/Pages/Languages/LanguagesEdit";
+import Objective from "./app/Pages/Objective/Objective";
 
 
 function App() {
   return (
     <div>
-   
+  
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<ContactInfo />} />
@@ -22,9 +23,10 @@ function App() {
             <Route path="experienceJobs/add" element={<Jobs />} />
             <Route path="experienceJobsEdit/:id" element={<JobsEdit />} />
             <Route path="education" element={<Education />} />
-            <Route path="skills" element={<Skills />} />
-            <Route path="preWritten" element={<PreWritten />} />
-            <Route path="languages" element={<Languages />} />
+            <Route path="skills-languages" element={<SkillsLanguages />} />
+            <Route path="languages/add" element={<LanguagesAdd />} />
+            <Route path="languages/edit" element={<LanguagesEdit />} />
+            <Route path="objective" element={<Objective/>}/>
           </Routes>
         </BrowserRouter>
       
