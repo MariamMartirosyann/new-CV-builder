@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { languageAbilityLevel } from "../../Redux/LanguagesSlice";
 import {
@@ -13,35 +14,38 @@ import {
 } from "@mui/material";
 import Input from "../../Shared/Input";
 import InputSubmit from "../../Shared/InputSubmit";
-import { addLanguageLevel } from "../../Redux/LanguagesSlice";
+import { updateLanguageLevel } from "../../Redux/LanguagesSlice";
 import { nanoid } from "nanoid";
 import "./style.css";
 
 const LanguagesEdit = () => {
   const [isActive, setIsActive] = useState(false);
-  const levelList = languageAbilityLevel;
-  console.log("levelList", levelList);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { id } = useParams();
+  const levelList = languageAbilityLevel;
+  const languages = useSelector((state) => state.languagesInfo.list);
+  const selectedLanguage = languages.find((item) => item.id === id);
+  console.log("languages", languages);
+  console.log("levelList", levelList);
+  console.log("selectedLanguage", selectedLanguage);
 
   const methods = useForm({
     defaultValues: {
       language: "",
+      languageLevel:"",
       courseOrCertification: "",
-      
     },
   });
 
-  const onSubmit = (formData) => {
-    const newFormData={
-      id: nanoid(),
-      language:formData.language,
-      languageLevel:formData.languageLevel,
-      courseOrCertification:formData.courseOrCertification,
-    }
-    dispatch( addLanguageLevel(newFormData));
-    console.log(newFormData);
+  const onSubmit = (formData1) => {
+    const newFormData = {
+      id: id,
+      language: formData1.language,
+      languageLevel: formData1.languageLevel,
+      courseOrCertification: formData1.courseOrCertification,
+    };
+    dispatch(updateLanguageLevel(newFormData));
     navigate("/skills-languages");
   };
   const handleClick = () => {
@@ -52,7 +56,18 @@ const LanguagesEdit = () => {
     handleSubmit,
     control,
     setValue,
+    reset,
   } = methods;
+
+  useEffect(() => {
+    if (selectedLanguage) {
+      reset({
+        language: selectedLanguage.language,
+        languageLevel: selectedLanguage.languageLevel,
+        courseOrCertification: selectedLanguage.courseOrCertification,
+      });
+    }
+  }, [reset, selectedLanguage]);
 
   return (
     <div className="main">
@@ -60,7 +75,7 @@ const LanguagesEdit = () => {
         variant="h3"
         style={{ marginLeft: "0", marginTop: "30px", marginBottom: "15px" }}
       >
-        Speak multiple languages?
+        Speak multiple languages?{id}
       </Typography>
       <Typography
         variant="p"
@@ -115,19 +130,18 @@ const LanguagesEdit = () => {
               setValue("languageLevel", String(e.target.value));
             }}
           >
-             {levelList.map((i) => (
-              
+            {levelList.map((i) => (
               <div className="level">
-               <FormControlLabel
-                onClick={handleClick}
-               key={i.id}
-               value={i.level}
-               control={<Radio className="radio" />}
-               label={i.level}
-               labelPlacement="end"
-             /></div>
-              ))}
-           
+                <FormControlLabel
+                  onClick={handleClick}
+                  key={i.id}
+                  value={i.level}
+                  control={<Radio className="radio" />}
+                  label={i.level}
+                  labelPlacement="end"
+                />
+              </div>
+            ))}
           </RadioGroup>
 
           <br />
@@ -163,8 +177,7 @@ const LanguagesEdit = () => {
               }}
             />
           </Box>
-        
-          
+
           <InputSubmit />
         </form>
       </FormProvider>

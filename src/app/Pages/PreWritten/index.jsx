@@ -12,6 +12,8 @@ import "./style.css";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 
 const PreWritten = () => {
+  const [value, setValue]= useState("")
+  console.log(value)
   const dispatch = useDispatch();
   const list = useSelector((state) => state.preWrittenInfo.list);
   const listNew = useSelector((state) => state.skillsInfo.list);
@@ -37,6 +39,7 @@ const PreWritten = () => {
     dispatch(preWrittenTextState(false))
   }
 
+  
   return (
     <>
       <div className="preWritten">
@@ -51,8 +54,11 @@ const PreWritten = () => {
         <br />
         <div className="searchDiv">
           {" "}
-          <TextField className="searchBar" helperText="Search" />{" "}
+          <TextField className="searchBar" helperText="Search" onChange={(e)=>setValue(e.target.value)}>
+            </TextField>
           <Search className="searchIcon" />
+          
+    
         </div>
 
         <div style={{ position: "relative", marginTop: "20px" }}>
@@ -62,7 +68,7 @@ const PreWritten = () => {
           </Typography>
           <br />
           <br />
-          {list.map((i) => (
+          {list.filter(item=>item.skills.toLowerCase().includes(value)).map((i) => (
             <div key={i.id} className="preWrittenDiv">
               {listNew.find((item) => item.id === i.id) ? (
                 <Done onClick={(e) => handleDelete(i, e)} />
@@ -75,6 +81,7 @@ const PreWritten = () => {
               &nbsp; {i.skills}
             </div>
           ))}
+          
         </div>
       </div>
     </>

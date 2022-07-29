@@ -26,9 +26,18 @@ const languagesSlice = createSlice({
       const newList = [...state.list, newItem];
       state.list= newList;
     },
+    updateLanguageLevel: (state, { payload }) => {
+      const newList = state.list.map((item, id) => {
+        if (item.id === payload.id) {
+        return payload;
+      }
+        return item
+      });
+      state.list=newList
+    },
   },
 });
 
-export const {  addLanguageLevel } = languagesSlice.actions;
+export const {  addLanguageLevel,updateLanguageLevel } = languagesSlice.actions;
 
 export default languagesSlice.reducer;
