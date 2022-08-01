@@ -5,16 +5,29 @@
 .textfield {
   background-color: rgb(206, 241, 229);
   border: none;
+  padding: 15px;
 }
+
 .toolbar {
   background-color: rgb(206, 241, 229);
-  width: 50%;
+  width: 53.7%;
   height: 50px;
-  position: absolute;
-  top: 0;
+  display: flex;
+  flex-direction: row;
+}
+.toolbarSmall{
+  width: 77%;
   display: flex;
   flex-direction: row;
 }
  .tools{
     margin: 10px;
  }
+.bold{
+  background-color: rgb(206, 241, 229);
+  border: none;
+  padding: 15px;
+  font-weight: 600;
+  font-size: 36px;
+  
+}
