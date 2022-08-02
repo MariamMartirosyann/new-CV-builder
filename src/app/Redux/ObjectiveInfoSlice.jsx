@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   list: null,
-  makeBold:false
 };
 
 const objectiveSlice = createSlice({
@@ -18,13 +17,11 @@ const objectiveSlice = createSlice({
       ]
       state.list=newList
     },
-    makeBoldState:(state, {payload})=>{
-      state.makeBold=payload
-    }
+   
   },
 
 });
 
-export const { addObjectiveInfo,deleteObjectiveInfo,makeBoldState } = objectiveSlice.actions;
+export const { addObjectiveInfo,deleteObjectiveInfo } = objectiveSlice.actions;
 
 export default objectiveSlice.reducer;

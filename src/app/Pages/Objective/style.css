@@ -2,32 +2,23 @@
   margin: 0 120px;
 }
 
-.textfield {
-  background-color: rgb(206, 241, 229);
-  border: none;
-  padding: 15px;
-}
-
 .toolbar {
   background-color: rgb(206, 241, 229);
-  width: 53.7%;
-  height: 50px;
+  width: 60%;
   display: flex;
   flex-direction: row;
-}
-.toolbarSmall{
-  width: 77%;
-  display: flex;
-  flex-direction: row;
-}
- .tools{
-    margin: 10px;
- }
-.bold{
-  background-color: rgb(206, 241, 229);
+  height: 200px;
   border: none;
-  padding: 15px;
-  font-weight: 600;
-  font-size: 36px;
-  
+}
+.addText {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding-right: 10px;
+}
+.subText {
+  font-size: 12px;
+  color: grey;
+  width: 100px;
+  margin: 10px;
 }

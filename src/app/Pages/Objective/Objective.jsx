@@ -1,101 +1,111 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Typography } from "@mui/material";
+import { useQuill } from "react-quilljs";
+import { Typography, Box } from "@mui/material";
 import InputSubmit from "../../Shared/InputSubmit";
 import { addObjectiveInfo } from "../../Redux/ObjectiveInfoSlice";
 import { preWrittenTextState } from "../../Redux/PreWrittenSlice";
-import FormatBoldIcon from "@mui/icons-material/FormatBold";
-import FormatItalicIcon from "@mui/icons-material/FormatItalic";
-import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
-import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
-import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import { ReactComponent as Add } from "../../../icons/add.svg";
 import PreWrittenObjective from "../PreWrittenObjective";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
+import "react-quill/dist/quill.snow.css";
 import "./style.css";
 
 const Objective = () => {
+  const dispatch = useDispatch();
   const preWrittenState = useSelector(
     (state) => state.preWrittenInfo.showPreWrittenText
   );
-  console.log("prewrittenState", preWrittenState);
+  const preWrittenText = useSelector((state) => state.objectiveInfo.list);
+
+  console.log("preWrittenText", preWrittenText);
+
   const [objective, setObjective] = useState("");
-  const dispatch = useDispatch();
- 
 
   const onSubmit = (event) => {
     event.preventDefault();
     dispatch(addObjectiveInfo({ objective: objective }));
   };
+
   const showPrewritten = () => {
     dispatch(preWrittenTextState(true));
   };
+  const modules = {
+    toolbar: [
+      ["bold", "italic", "underline"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ align: [] }],
+    ],
+  };
+
+  const { quill, quillRef } = useQuill({ modules });
+
+  React.useEffect(() => {
+    if (quill) {
+      quill.on("text-change", () => {
+        setObjective(quillRef.current.firstChild.innerHTML);
+      });
+    }
+  }, [quill]);
+
+  useEffect(() => {
+    if (preWrittenText) {
+      setObjective(preWrittenText.objective)
+      quill.insertText(quillRef.current.firstChild.innerHTML.length, preWrittenText.objective);
+    }
+  }, [preWrittenText]);
+
   return (
     <div className="main">
-      {}
       {preWrittenState ? <PreWrittenObjective /> : <Sidebar />}
       <Typography
-        variant="h3"
+        variant="h4"
         style={{ marginLeft: "0", marginTop: "30px", marginBottom: "15px" }}
       >
         Great! Let's edit your work experience
       </Typography>
+      <Box style={{ width: "40%" }}>
+        <Typography variant="p">
+          Start with your most recent position and work backwards. Just add the
+          most recent and relevant positions if you have lots of experience.
+        </Typography>
+      </Box>
+
       <Typography
-        variant="p"
+        variant="h5"
+        style={{ marginLeft: "0", marginTop: "30px", marginBottom: "15px" }}
       >
-        Start with your most recent position and work backwards. Just add the
-        most recent and relevant positions if you have lots of experience.
+        Objective
       </Typography>
-      <div className="toolbar">
-        <div className="toolbarSmall">
-          <div className="tools" >
-            <FormatBoldIcon />
-          </div>
-          <div className="tools">
-            <FormatItalicIcon />
-          </div>
-          <div className="tools">
-            <FormatUnderlinedIcon />
-          </div>
-          <div className="tools">
-            <FormatListBulletedIcon />
-          </div>
-          <div className="tools">
-            <FormatListNumberedIcon />
-          </div>
-          <div className="tools">
-            <FormatAlignCenterIcon />
-          </div>
-          <div className="tools">
-            <FormatAlignJustifyIcon />
-          </div>
-        </div>
-        <div className="tools">
-          {" "}
+      <form onSubmit={onSubmit} className="formStyle">
+        <div
+          style={{
+            width: 700,
+            height: 300,
+            background: "rgba(206, 241, 229, .2)",
+            position: "relative",
+            border: "none",
+          }}
+        >
+          <div ref={quillRef} />
           <Typography
             onClick={showPrewritten}
             variant="h6"
+            className="addText"
             style={{
+              margin: "10px",
               marginLeft: "0",
               color: "rgb(103, 103, 241)",
-              textAlign: "end",
             }}
           >
             <Add /> Add pre-written text
           </Typography>
-        </div>
-      </div>
-      <form onSubmit={onSubmit} className="formStyle">
-        <div style={{ position: "relative", marginBottom: "20px" }}>
-          <textarea
-            className="textfield "
-            cols="50"
-            rows="20"
-            style={{ width: "52%", height: "250px", marginBottom: "30px" }}
-            onChange={(e) => setObjective(e.target.value)}
-          />
+          <Typography variant="p" className="subText">
+            e.g. Proactive, customer-orientated retail professional with over 4
+            years of experience in reputable shops. Received 3 ‘Passion Awards’
+            for delivering outstanding service and have consistently surpassed
+            my target KPIs for mystery shoppers.
+          </Typography>
         </div>
 
         <br />
@@ -109,4 +119,3 @@ const Objective = () => {
 };
 
 export default Objective;
-//https://www.npmjs.com/package/react-quill

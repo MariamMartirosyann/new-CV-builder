@@ -29,7 +29,7 @@ const PreWrittenObjective = () => {
       objective: item.objective,
     };
     dispatch(addObjectiveInfo(newFormData));
-    console.log("newFormData",newFormData)
+    console.log("newFormData", newFormData);
   };
   const handleDelete = (item) => {
     dispatch(deleteObjectiveInfo({ id: item.id }));
@@ -66,17 +66,20 @@ const PreWrittenObjective = () => {
           <Typography variant="p" className="title1">
             COMMON PHRASES
           </Typography>
-          <br />
+          
           <br />
           {list.map((i) => (
             <div key={i.id} className="preWrittenDiv">
-            
+              <div>
+                {" "}
                 <Add1
                   className="preWrittenIcon"
                   onClick={(e) => handleAdd(i, e)}
                 />
-              
-              &nbsp; {i.objective}
+              </div>
+              &nbsp;
+              &nbsp;
+              <div>  {i.objective}</div>
             </div>
           ))}
         </div>
