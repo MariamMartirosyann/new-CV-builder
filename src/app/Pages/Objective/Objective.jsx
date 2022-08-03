@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useQuill } from "react-quilljs";
 import { Typography, Box } from "@mui/material";
 import InputSubmit from "../../Shared/InputSubmit";
-import { addObjectiveInfo } from "../../Redux/ObjectiveInfoSlice";
+import { submitObjectiveInfo } from "../../Redux/ObjectiveInfoSlice";
 import { preWrittenTextState } from "../../Redux/PreWrittenSlice";
 import { ReactComponent as Add } from "../../../icons/add.svg";
 import PreWrittenObjective from "../PreWrittenObjective";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
+import { nanoid } from "@reduxjs/toolkit";
 import "react-quill/dist/quill.snow.css";
 import "./style.css";
+import { EventRepeat } from "@mui/icons-material";
 
 const Objective = () => {
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const Objective = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    dispatch(addObjectiveInfo({ objective: objective }));
+    dispatch(submitObjectiveInfo({ id: nanoid(), objective: objective }));
   };
 
   const showPrewritten = () => {
@@ -50,8 +52,11 @@ const Objective = () => {
 
   useEffect(() => {
     if (preWrittenText) {
-      setObjective(preWrittenText.objective)
-      quill.insertText(quillRef.current.firstChild.innerHTML.length, preWrittenText.objective);
+      setObjective(preWrittenText);
+      quill.insertText(
+        quillRef.current.firstChild.innerHTML.length,
+        preWrittenText
+      );
     }
   }, [preWrittenText]);
 

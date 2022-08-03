@@ -66,20 +66,17 @@ const PreWrittenObjective = () => {
           <Typography variant="p" className="title1">
             COMMON PHRASES
           </Typography>
-          
           <br />
           {list.map((i) => (
             <div key={i.id} className="preWrittenDiv">
               <div>
-                {" "}
                 <Add1
                   className="preWrittenIcon"
                   onClick={(e) => handleAdd(i, e)}
                 />
               </div>
-              &nbsp;
-              &nbsp;
-              <div>  {i.objective}</div>
+              &nbsp; &nbsp;
+              <div> {i.objective}</div>
             </div>
           ))}
         </div>
@@ -89,3 +86,10 @@ const PreWrittenObjective = () => {
 };
 
 export default PreWrittenObjective;
+/*{listNew?.find((item) => item.id === i.id) ?( <Done
+  className="preWrittenIcon"
+  onClick={(e) => handleDelete(i, e)}
+/>):( <Add1
+  className="preWrittenIcon"
+  onClick={(e) => handleAdd(i, e)}
+/>)}*/

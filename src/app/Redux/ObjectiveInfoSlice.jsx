@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  list: null,
+  list: [],
+  submitList:null,
 };
 
 const objectiveSlice = createSlice({
@@ -11,17 +12,17 @@ const objectiveSlice = createSlice({
     addObjectiveInfo: (state, { payload }) => {
       state.list = payload;
     },
-    deleteObjectiveInfo:(state,{payload})=>{
-     const newList=[
-        ...state.list.filter(i=>i.id!==payload.id)
-      ]
-      state.list=newList
+    submitObjectiveInfo: (state, { payload }) => {
+      state.submitList = payload;
+    },
+    deleteObjectiveInfo:(state, { payload }) => {
+      state.list = [...state.list.filter((item) => item.id !== payload.id)];
     },
    
   },
 
 });
 
-export const { addObjectiveInfo,deleteObjectiveInfo } = objectiveSlice.actions;
+export const { addObjectiveInfo, submitObjectiveInfo,deleteObjectiveInfo } = objectiveSlice.actions;
 
 export default objectiveSlice.reducer;

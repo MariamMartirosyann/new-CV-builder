@@ -21,7 +21,7 @@ const PreWritten = () => {
     (state) => state.preWrittenInfo.showPreWrittenText
   );
 
-  console.log("state",state)
+ 
   console.log("listt", list);
   console.log("Newlistt", listNew);
 
