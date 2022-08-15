@@ -69,14 +69,29 @@ const PreWrittenObjective = () => {
           <br />
           {list.map((i) => (
             <div key={i.id} className="preWrittenDiv">
-              <div>
+              {list.indexOf(listNew ==1)?(
+                <Done
+                  className="preWrittenIcon"
+                  onClick={(e) => handleDelete(i, e)}
+                />
+              ):(
                 <Add1
                   className="preWrittenIcon"
                   onClick={(e) => handleAdd(i, e)}
                 />
-              </div>
-              &nbsp; &nbsp;
-              <div> {i.objective}</div>
+              ) }
+              {list.indexOf(listNew ==-1)?(
+                <Add1
+                  className="preWrittenIcon"
+                  onClick={(e) => handleAdd(i, e)}
+                />
+              ):(
+                <Done
+                  className="preWrittenIcon"
+                  onClick={(e) => handleDelete(i, e)}
+                />
+              ) }
+              &nbsp; {i.objective}
             </div>
           ))}
         </div>
@@ -93,3 +108,17 @@ export default PreWrittenObjective;
   className="preWrittenIcon"
   onClick={(e) => handleAdd(i, e)}
 />)}*/
+/*{list.map((i) => (
+            <div key={i.id} className="preWrittenDiv">
+              <div>
+                <Add1
+                  className="preWrittenIcon"
+                  onClick={(e) => handleDelete(i, e)}
+                />
+              </div>
+              &nbsp; &nbsp;
+              <div> {i.objective}</div>
+            </div>
+          ))}
+
+*/

@@ -19,8 +19,7 @@ const Objective = () => {
     (state) => state.preWrittenInfo.showPreWrittenText
   );
   const preWrittenText = useSelector((state) => state.objectiveInfo.list);
-
-  console.log("preWrittenText", preWrittenText);
+  console.log("preWrittenText",preWrittenText);
 
   const [objective, setObjective] = useState("");
 
@@ -55,7 +54,7 @@ const Objective = () => {
       setObjective(preWrittenText);
       quill.insertText(
         quillRef.current.firstChild.innerHTML.length,
-        preWrittenText
+        preWrittenText.objective
       );
     }
   }, [preWrittenText]);

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  list: [],
+  list: null,
   submitList:null,
 };
 
@@ -17,7 +17,7 @@ const objectiveSlice = createSlice({
     },
     deleteObjectiveInfo:(state, { payload }) => {
       state.list = [...state.list.filter((item) => item.id !== payload.id)];
-    },
+    }
    
   },
 
