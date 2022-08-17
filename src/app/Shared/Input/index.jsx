@@ -14,6 +14,7 @@ const Input = (props) => {
     errors,
     helperText,
     fullWidth = true,
+    onChange
   } = props
   const { control } = useFormContext();
   return (
@@ -24,7 +25,7 @@ const Input = (props) => {
         name={name}
         control={control}
         rules={rules}
-       
+        onChange={onChange}
         render={({field}) => (
           <TextField
           {...field}

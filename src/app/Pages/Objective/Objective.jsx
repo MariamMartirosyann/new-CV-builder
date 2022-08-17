@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { FormProvider } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useQuill } from "react-quilljs";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, TextField } from "@mui/material";
 import InputSubmit from "../../Shared/InputSubmit";
 import { submitObjectiveInfo } from "../../Redux/ObjectiveInfoSlice";
 import { preWrittenTextState } from "../../Redux/PreWrittenSlice";
 import { ReactComponent as Add } from "../../../icons/add.svg";
+import Input from "../../Shared/Input";
 import PreWrittenObjective from "../PreWrittenObjective";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import { nanoid } from "@reduxjs/toolkit";
@@ -19,14 +22,20 @@ const Objective = () => {
     (state) => state.preWrittenInfo.showPreWrittenText
   );
   const preWrittenText = useSelector((state) => state.objectiveInfo.list);
-  console.log("preWrittenText",preWrittenText);
+const lastElement=preWrittenText[preWrittenText.length-1]
+const El=lastElement?.objective
+const ElIndex=lastElement?.index
+  console.log("lastElement", lastElement);
+  console.log("El", El);
+  console.log("ElIndex", ElIndex);
 
   const [objective, setObjective] = useState("");
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    dispatch(submitObjectiveInfo({ id: nanoid(), objective: objective }));
-  };
+  useEffect(() => {
+    if (preWrittenText) {
+      setObjective(preWrittenText.objective);
+    }
+  }, [preWrittenText]);
 
   const showPrewritten = () => {
     dispatch(preWrittenTextState(true));
@@ -38,7 +47,10 @@ const Objective = () => {
       [{ align: [] }],
     ],
   };
-
+  const onSubmit = (event) => {
+    event.preventDefault();
+    dispatch(submitObjectiveInfo({ id: nanoid(), objective: objective }));
+  };
   const { quill, quillRef } = useQuill({ modules });
 
   React.useEffect(() => {
@@ -50,18 +62,23 @@ const Objective = () => {
   }, [quill]);
 
   useEffect(() => {
-    if (preWrittenText) {
+    if (El) {
       setObjective(preWrittenText);
-      quill.insertText(
-        quillRef.current.firstChild.innerHTML.length,
-        preWrittenText.objective
-      );
+      quill.insertText(quillRef.current.firstChild.innerHTML.length, El);
     }
-  }, [preWrittenText]);
+  }, [El]);
 
+  useEffect(() => {
+    if (ElIndex) {
+      setObjective(preWrittenText);
+      quill.deleteText(quillRef.current.firstChild.innerHTML.length-1);
+    }
+  }, [ElIndex]);
+  
   return (
     <div className="main">
       {preWrittenState ? <PreWrittenObjective /> : <Sidebar />}
+
       <Typography
         variant="h4"
         style={{ marginLeft: "0", marginTop: "30px", marginBottom: "15px" }}
@@ -114,8 +131,16 @@ const Objective = () => {
 
         <br />
         <br />
+
         <br />
         <br />
+        <Add onClick={showPrewritten} />
+
+        <div>
+          {preWrittenText.map((i) => (
+            <li key={i.id}>{i.objective}</li>
+          ))}
+        </div>
         <InputSubmit />
       </form>
     </div>
@@ -123,3 +148,22 @@ const Objective = () => {
 };
 
 export default Objective;
+/*  <div ref={quillRef} />
+            <Typography
+              onClick={showPrewritten}
+              variant="h6"
+              className="addText"
+              style={{
+                margin: "10px",
+                marginLeft: "0",
+                color: "rgb(103, 103, 241)",
+              }}
+            >
+              <Add /> Add pre-written text
+            </Typography>
+            <Typography variant="p" className="subText">
+              e.g. Proactive, customer-orientated retail professional with over
+              4 years of experience in reputable shops. Received 3 ‘Passion
+              Awards’ for delivering outstanding service and have consistently
+              surpassed my target KPIs for mystery shoppers.
+            </Typography>*/

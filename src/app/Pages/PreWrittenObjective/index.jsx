@@ -26,6 +26,7 @@ const PreWrittenObjective = () => {
   const handleAdd = (item) => {
     const newFormData = {
       id: item.id,
+      index:item.index,
       objective: item.objective,
     };
     dispatch(addObjectiveInfo(newFormData));
@@ -69,28 +70,15 @@ const PreWrittenObjective = () => {
           <br />
           {list.map((i) => (
             <div key={i.id} className="preWrittenDiv">
-              {list.indexOf(listNew ==1)?(
-                <Done
-                  className="preWrittenIcon"
-                  onClick={(e) => handleDelete(i, e)}
-                />
-              ):(
+              {listNew.find((item) => item.id === i.id) ? (
+                <Done onClick={(e) => handleDelete(i, e)} />
+              ) : (
                 <Add1
                   className="preWrittenIcon"
                   onClick={(e) => handleAdd(i, e)}
                 />
-              ) }
-              {list.indexOf(listNew ==-1)?(
-                <Add1
-                  className="preWrittenIcon"
-                  onClick={(e) => handleAdd(i, e)}
-                />
-              ):(
-                <Done
-                  className="preWrittenIcon"
-                  onClick={(e) => handleDelete(i, e)}
-                />
-              ) }
+              )}
+            
               &nbsp; {i.objective}
             </div>
           ))}
@@ -107,18 +95,6 @@ export default PreWrittenObjective;
 />):( <Add1
   className="preWrittenIcon"
   onClick={(e) => handleAdd(i, e)}
-/>)}*/
-/*{list.map((i) => (
-            <div key={i.id} className="preWrittenDiv">
-              <div>
-                <Add1
-                  className="preWrittenIcon"
-                  onClick={(e) => handleDelete(i, e)}
-                />
-              </div>
-              &nbsp; &nbsp;
-              <div> {i.objective}</div>
-            </div>
-          ))}
+/>)}
 
-*/
+https://quilljs.com/0.20/docs/api/#quillprototypeinserttext*/
