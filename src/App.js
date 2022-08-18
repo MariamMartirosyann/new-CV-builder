@@ -10,6 +10,7 @@ import JobsEdit from "./app/Pages/JobsEdit";
 import LanguagesAdd from "./app/Pages/Languages/LanguagesAdd";
 import LanguagesEdit from "./app/Pages/Languages/LanguagesEdit";
 import Objective from "./app/Pages/Objective/Objective";
+import Templates from "./app/Pages/Templates";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="languages/add" element={<LanguagesAdd />} />
           <Route path="languages/edit/:id" element={<LanguagesEdit />} />
           <Route path="objective" element={<Objective />} />
+          <Route path="templates" element={<Templates />} />
         </Routes>
       </BrowserRouter>
     </div>
