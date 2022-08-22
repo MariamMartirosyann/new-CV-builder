@@ -4,7 +4,9 @@ import jobsInfoReducer from "./JobsSlice";
 import skillsInfoReducer from "./SkillsSlice";
 import preWrittenInfoReducer from "./PreWrittenSlice";
 import languagesInfoReducer from "./LanguagesSlice";
-import objectiveInfoReducer from "./ObjectiveInfoSlice"
+import objectiveInfoReducer from "./ObjectiveInfoSlice";
+import submitObjectiveInfoReducer from "./SubmitObjectiveInfoSlice";
+import imageReducer from "./ImageSlice"
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +16,7 @@ export const store = configureStore({
     preWrittenInfo: preWrittenInfoReducer,
     languagesInfo:languagesInfoReducer,
     objectiveInfo:objectiveInfoReducer,
+    submitObjectiveInfo:submitObjectiveInfoReducer,
+    image:imageReducer
   },
 });

@@ -5,7 +5,8 @@ import { FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ImageUploading from 'react-images-uploading';
-import {addContactInfo} from "../../Redux/ContactInfoSlice"
+import {addContactInfo} from "../../Redux/ContactInfoSlice";
+import { addImage } from "../../Redux/ImageSlice";
 import { Box, Typography, Grid } from "@mui/material";
 import Empty from "../../../images/empty.webp";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
@@ -24,6 +25,7 @@ const ContactInfo = () => {
     // data for submit
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
+    dispatch(addImage(imageList))
   };
   
   const methods = useForm({
@@ -123,7 +125,7 @@ const ContactInfo = () => {
               </Box>
             </Grid>
             <Grid item lg={3}>
-              <Grid container>
+              <Grid container style={{margin:"15px"}}>
                 <Grid item>
            
                   <div className="App">
@@ -133,7 +135,7 @@ const ContactInfo = () => {
         multiple
         value={images}
         onChange={onChange}
-        maxNumber={maxNumber}
+        maxNumber={1}
         dataURLKey="data_url"
       >
         {({
@@ -148,15 +150,15 @@ const ContactInfo = () => {
           // write your building UI
           <div className="upload__image-wrapper">
             
-            <p
+            <button
               style={isDragging ? { color: 'red' } : undefined}
               onClick={onImageUpload}
               {...dragProps}
             >
              Add Profile Photo
-            </p>
+            </button>
             &nbsp;
-            <img src={Empty} alt="Empty"/>
+      
             {imageList.map((image, index) => (
               <div key={index} className="image-item">
                 <Grid container spacing={3}>
@@ -165,7 +167,7 @@ const ContactInfo = () => {
                   <div className="image-item__btn-wrapper">
                     
                   <button onClick={() => onImageUpdate(index)}>Update</button><br/>
-                  <button onClick={() => onImageRemove(index)}>x</button>
+                  <button onClick={() => onImageRemove(index)}>Delete</button>
                 </div></Grid>
                 </Grid>
                 
@@ -178,7 +180,7 @@ const ContactInfo = () => {
     </div>
                 </Grid>
                 <Grid item> 
-                <p>Add Profile Photo</p>        
+                     
      </Grid>
               </Grid>
    

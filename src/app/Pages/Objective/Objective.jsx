@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useQuill } from "react-quilljs";
 import { Typography, Box, TextField } from "@mui/material";
 import InputSubmit from "../../Shared/InputSubmit";
-import { submitObjectiveInfo } from "../../Redux/ObjectiveInfoSlice";
+import { submitObjectiveInfo } from "../../Redux/SubmitObjectiveInfoSlice";
 import { preWrittenTextState } from "../../Redux/PreWrittenSlice";
 import { ReactComponent as Add } from "../../../icons/add.svg";
 import Input from "../../Shared/Input";
@@ -48,9 +48,12 @@ const ElIndex=lastElement?.index
       [{ align: [] }],
     ],
   };
-  const onSubmit = (event) => {
+  const handleSubmit = (event) => {
+    console.log("11111111")
     event.preventDefault();
+    
     dispatch(submitObjectiveInfo({ id: nanoid(), objective: objective }));
+
   };
   const { quill, quillRef } = useQuill({ modules });
 
@@ -99,7 +102,7 @@ const ElIndex=lastElement?.index
       >
         Objective
       </Typography>
-      <form onSubmit={onSubmit} className="formStyle">
+      <form className="formStyle">
         <div
           style={{
             width: 700,
@@ -136,7 +139,7 @@ const ElIndex=lastElement?.index
         <br />
         <br />
         <Link to="/templates">
-        <InputSubmit />
+        <button  onClick={handleSubmit} >++++</button>
         </Link>
       </form>
     </div>
