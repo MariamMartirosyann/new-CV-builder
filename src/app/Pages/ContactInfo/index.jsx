@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import { FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import ImageUploading from 'react-images-uploading';
 import {addContactInfo} from "../../Redux/ContactInfoSlice"
 import { Box, Typography, Grid } from "@mui/material";
+import Empty from "../../../images/empty.webp";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import InputSubmit from "../../Shared/InputSubmit";
 import "./style.css";
@@ -16,6 +18,13 @@ const ContactInfo = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [images, setImages] = React.useState([]);
+  const maxNumber = 69;
+  const onChange = (imageList, addUpdateIndex) => {
+    // data for submit
+    console.log(imageList, addUpdateIndex);
+    setImages(imageList);
+  };
   
   const methods = useForm({
     defaultValues: {
@@ -66,10 +75,10 @@ const ContactInfo = () => {
       </Typography>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} className="formStyle">
-          <Grid>
-            <Grid item>
+          <Grid container  spacing={1}>
+            <Grid item lg={3}>
               {" "}
-              <Box style={{ width: "25%", marginTop: "10px" }}>
+              <Box style={{ width: "100%", marginTop: "10px" }}>
                 {" "}
                 <Input
                   name="name"
@@ -91,7 +100,7 @@ const ContactInfo = () => {
                   }}
                 />
               </Box>
-              <Box style={{ width: "25%", marginTop: "10px" }}>
+              <Box style={{ width: "100%", marginTop: "10px" }}>
                 <Input
                   name="surname"
                   control={control}
@@ -113,7 +122,67 @@ const ContactInfo = () => {
                 />
               </Box>
             </Grid>
-            <Grid item></Grid>
+            <Grid item lg={3}>
+              <Grid container>
+                <Grid item>
+           
+                  <div className="App">
+              
+                    
+      <ImageUploading
+        multiple
+        value={images}
+        onChange={onChange}
+        maxNumber={maxNumber}
+        dataURLKey="data_url"
+      >
+        {({
+          imageList,
+          onImageUpload,
+          onImageRemoveAll,
+          onImageUpdate,
+          onImageRemove,
+          isDragging,
+          dragProps,
+        }) => (
+          // write your building UI
+          <div className="upload__image-wrapper">
+            
+            <p
+              style={isDragging ? { color: 'red' } : undefined}
+              onClick={onImageUpload}
+              {...dragProps}
+            >
+             Add Profile Photo
+            </p>
+            &nbsp;
+            <img src={Empty} alt="Empty"/>
+            {imageList.map((image, index) => (
+              <div key={index} className="image-item">
+                <Grid container spacing={3}>
+                  <Grid item><img src={image['data_url']} alt="" width="100" /></Grid>
+                  <Grid item>
+                  <div className="image-item__btn-wrapper">
+                    
+                  <button onClick={() => onImageUpdate(index)}>Update</button><br/>
+                  <button onClick={() => onImageRemove(index)}>x</button>
+                </div></Grid>
+                </Grid>
+                
+                
+              </div>
+            ))}
+          </div>
+        )}
+      </ImageUploading>
+    </div>
+                </Grid>
+                <Grid item> 
+                <p>Add Profile Photo</p>        
+     </Grid>
+              </Grid>
+   
+            </Grid>
           </Grid>
 
           <Box style={{ width: "50%", marginTop: "10px"}}>

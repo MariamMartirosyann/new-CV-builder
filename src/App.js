@@ -11,6 +11,7 @@ import LanguagesAdd from "./app/Pages/Languages/LanguagesAdd";
 import LanguagesEdit from "./app/Pages/Languages/LanguagesEdit";
 import Objective from "./app/Pages/Objective/Objective";
 import Templates from "./app/Pages/Templates";
+import TemplateOne from "./app/Pages/Templates/Slider/SliderItems/Template1"
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="languages/edit/:id" element={<LanguagesEdit />} />
           <Route path="objective" element={<Objective />} />
           <Route path="templates" element={<Templates />} />
+          <Route path="templateOne" element={<TemplateOne />} />
         </Routes>
       </BrowserRouter>
     </div>
