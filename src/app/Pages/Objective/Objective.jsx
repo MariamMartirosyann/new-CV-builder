@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { FormProvider } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useQuill } from "react-quilljs";
-import { Typography, Box, TextField } from "@mui/material";
-import InputSubmit from "../../Shared/InputSubmit";
+import { Typography, Box, Grid} from "@mui/material";
 import { submitObjectiveInfo } from "../../Redux/SubmitObjectiveInfoSlice";
 import { preWrittenTextState } from "../../Redux/PreWrittenSlice";
 import { ReactComponent as Add } from "../../../icons/add.svg";
@@ -19,13 +16,14 @@ import { EventRepeat } from "@mui/icons-material";
 
 const Objective = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const preWrittenState = useSelector(
     (state) => state.preWrittenInfo.showPreWrittenText
   );
   const preWrittenText = useSelector((state) => state.objectiveInfo.list);
-const lastElement=preWrittenText[preWrittenText.length-1]
-const El=lastElement?.objective
-const ElIndex=lastElement?.index
+  const lastElement = preWrittenText[preWrittenText.length - 1];
+  const El = lastElement?.objective;
+  const ElIndex = lastElement?.index;
   console.log("lastElement", lastElement);
   console.log("El", El);
   console.log("ElIndex", ElIndex);
@@ -49,11 +47,10 @@ const ElIndex=lastElement?.index
     ],
   };
   const handleSubmit = (event) => {
-    console.log("11111111")
+    console.log("11111111");
     event.preventDefault();
-    
     dispatch(submitObjectiveInfo({ id: nanoid(), objective: objective }));
-
+    navigate("/templates");
   };
   const { quill, quillRef } = useQuill({ modules });
 
@@ -72,13 +69,13 @@ const ElIndex=lastElement?.index
     }
   }, [El]);
 
- /* useEffect(() => {
+  /* useEffect(() => {
     if (ElIndex) {
       setObjective(preWrittenText);
       quill.deleteText(quillRef.current.firstChild.innerHTML.length+1,ElIndex);
     }
   }, [ElIndex]);*/
-  
+
   return (
     <div className="main">
       {preWrittenState ? <PreWrittenObjective /> : <Sidebar />}
@@ -133,24 +130,15 @@ const ElIndex=lastElement?.index
           </Typography>
         </div>
 
-        <br />
-        <br />
-
-        <br />
-        <br />
-        <Link to="/templates">
-        <button  onClick={handleSubmit} >++++</button>
-        </Link>
+        <Box container className="btnDiv">
+          {" "}
+          <button className="finishBtn" onClick={handleSubmit}>
+            Finish
+          </button>
+        </Box>
       </form>
     </div>
   );
 };
 
 export default Objective;
-/*<Add onClick={showPrewritten} />
-
-        <div>
-          {preWrittenText.map((i) => (
-            <li key={i.id}>{i.objective}</li>
-          ))}
-        </div> */
