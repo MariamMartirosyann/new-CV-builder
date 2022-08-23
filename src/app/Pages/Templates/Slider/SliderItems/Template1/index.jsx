@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Box } from "@mui/material";
 import Sidebar from "../../../../../Shared/Sidebar/Sidebar";
 import "./style.css";
 
@@ -9,9 +9,11 @@ const TemplateOne = () => {
   const contactInfo = useSelector((state) => state.contactInfo.list);
   const skills = useSelector((state) => state.skillsInfo.list);
   const languages = useSelector((state) => state.languagesInfo.list);
-  const objective = useSelector((state) => state.submitObjectiveInfo.submitList);
-  const obj=objective?.objective;
-  console.log(" obj",  obj);
+  const objective = useSelector(
+    (state) => state.submitObjectiveInfo.submitList
+  );
+  const obj = objective?.objective;
+  console.log(" obj", obj);
   console.log("img", img);
   const image = img?.[0]?.data_url;
   console.log("image", image);
@@ -198,8 +200,8 @@ const TemplateOne = () => {
         </Grid>
 
         <Grid item lg={6} className="rightSide">
-          <Grid container>
-            <Grid item lg={4}>
+          <div>
+            <div style={{ height: "30%" }}>
               {" "}
               <Typography
                 variant="h5"
@@ -216,7 +218,7 @@ const TemplateOne = () => {
                 style={{
                   marginLeft: "0",
                   marginTop: "15px",
-                  marginBottom: "15px",
+                  marginBottom: "0px",
                 }}
               >
                 {contactInfo?.occupation}
@@ -225,23 +227,37 @@ const TemplateOne = () => {
                 variant="p"
                 style={{
                   marginLeft: "0",
-                  marginTop: "15px",
+                  marginTop: "0px",
                   marginBottom: "15px",
                 }}
-              >
-                { obj}
-              </Typography>
-            </Grid>
-            <Grid item lg={2}>
-              {" "}
+                dangerouslySetInnerHTML={{ __html: obj }}
+              ></Typography>
+            </div>
+            <div style={{ height: "30%" }}>
               {image ? (
                 <img
                   src={image}
-                  style={{ width: "100x", height: "100px" }}
+                  style={{
+                    width: "100x",
+                    height: "130px",
+                    margin: " 50px 10px",
+                  }}
                   alt="img"
                 />
               ) : null}
-            </Grid>
+            </div>
+          </div>
+
+          <Grid item lg={6}>
+            <Typography
+              variant="h6"
+              style={{
+                marginTop: "30px",
+                marginBottom: "15px",
+              }}
+            >
+              Experience
+            </Typography>
           </Grid>
         </Grid>
       </Grid>

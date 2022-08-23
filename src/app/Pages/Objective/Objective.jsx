@@ -6,13 +6,11 @@ import { Typography, Box, Grid} from "@mui/material";
 import { submitObjectiveInfo } from "../../Redux/SubmitObjectiveInfoSlice";
 import { preWrittenTextState } from "../../Redux/PreWrittenSlice";
 import { ReactComponent as Add } from "../../../icons/add.svg";
-import Input from "../../Shared/Input";
 import PreWrittenObjective from "../PreWrittenObjective";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import { nanoid } from "@reduxjs/toolkit";
 import "react-quill/dist/quill.snow.css";
 import "./style.css";
-import { EventRepeat } from "@mui/icons-material";
 
 const Objective = () => {
   const dispatch = useDispatch();
