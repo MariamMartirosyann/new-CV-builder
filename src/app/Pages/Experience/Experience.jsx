@@ -178,7 +178,7 @@ const Experience = () => {
           </div>
         </div>
         <div  className="btnDiv">
-          <Link to="/skills-languages">
+          <Link to="/education">
             <InputSubmit/>
           </Link>
         </div>

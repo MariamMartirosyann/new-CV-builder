@@ -36,3 +36,13 @@
 .nameDiv{
   width:80%
 }
+.downLoadBtn{
+  width: 170px;
+  height: 50px;
+  background: brown;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  margin: 5% 30%;
+
+}

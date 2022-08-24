@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+//import { PDFViewer } from '@react-pdf/renderer';
 import "./App.css";
 import ContactInfo from "./app/Pages/ContactInfo";
 import Experience from "./app/Pages/Experience/Experience";
@@ -11,11 +12,15 @@ import LanguagesAdd from "./app/Pages/Languages/LanguagesAdd";
 import LanguagesEdit from "./app/Pages/Languages/LanguagesEdit";
 import Objective from "./app/Pages/Objective/Objective";
 import Templates from "./app/Pages/Templates";
-import TemplateOne from "./app/Pages/Templates/Slider/SliderItems/Template1"
+import TemplateOne from "./app/Pages/Templates/Slider/SliderItems/Template1";
+import EducationItem from "./app/Pages/EducationItem";
+import EducationItemEdit from "./app/Pages/EducationItemEdit";
+
 
 function App() {
   return (
     <div>
+     
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ContactInfo />} />
@@ -23,6 +28,8 @@ function App() {
           <Route path="experienceJobs/add" element={<Jobs />} />
           <Route path="experienceJobsEdit/:id" element={<JobsEdit />} />
           <Route path="education" element={<Education />} />
+          <Route path="educationItem/add" element={<EducationItem />} />
+          <Route path="educationItemEdit/:id" element={<EducationItemEdit />} />
           <Route path="skills-languages" element={<SkillsLanguages />} />
           <Route path="languages/add" element={<LanguagesAdd />} />
           <Route path="languages/edit/:id" element={<LanguagesEdit />} />
@@ -31,6 +38,7 @@ function App() {
           <Route path="templateOne" element={<TemplateOne />} />
         </Routes>
       </BrowserRouter>
+ 
     </div>
   );
 }

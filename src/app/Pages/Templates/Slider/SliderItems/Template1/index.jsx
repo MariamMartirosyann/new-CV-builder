@@ -12,11 +12,14 @@ const TemplateOne = () => {
   const objective = useSelector(
     (state) => state.submitObjectiveInfo.submitList
   );
+  const experience = useSelector((state) => state.jobsInfo.list);
+  const education = useSelector((state) => state.educationInfo.list);
+  const description=experience?.description;
+  console.log("experience", experience);
   const obj = objective?.objective;
-  console.log(" obj", obj);
-  console.log("img", img);
+ 
   const image = img?.[0]?.data_url;
-  console.log("image", image);
+ 
 
   return (
     <div className="main1">
@@ -200,7 +203,7 @@ const TemplateOne = () => {
         </Grid>
 
         <Grid item lg={6} className="rightSide">
-          <div>
+          <div className="top">
             <div style={{ height: "30%" }}>
               {" "}
               <Typography
@@ -247,18 +250,117 @@ const TemplateOne = () => {
               ) : null}
             </div>
           </div>
+          <hr />
+          <div className="experience">
+            <div className="experienceLeftSide">
+              <Typography
+                variant="h6"
+                style={{
+                  marginTop: "30px",
+                  marginBottom: "15px",
+                }}
+              >
+                Experience
+              </Typography>
+              {experience?.map((i) => (
+                <div key={i.id}>
+                  <p className="experienceText">{i.location}</p>
+                  <p className="experienceText">
+                    {i.startDate}-{i.endDate}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="experienceRightSide">
 
-          <Grid item lg={6}>
-            <Typography
-              variant="h6"
-              style={{
-                marginTop: "30px",
-                marginBottom: "15px",
-              }}
-            >
-              Experience
-            </Typography>
-          </Grid>
+              {experience?.map((i) => (
+                
+                <div key={i.id}>
+                    <Typography
+                    variant="h6"
+                    style={{
+                      marginTop: "60px",
+                      marginBottom: "0",
+                      color:"rgb(38, 160, 244)"
+                    }}
+                    className="experienceRightSideText"
+                  >
+                  {i.position}
+                   </Typography>
+                 <b> <Typography
+                    variant="h6"
+                    style={{
+                      marginTop: "0",
+                      marginBottom: "15px",
+                    }}
+                    className="experienceRightSideText"
+                  >
+                    {i.company}
+                  </Typography></b>
+                  <div style={{width:"100%"}}>
+                  <p className="experienceText">{i.description}</p>
+                  </div>
+                </div>
+              ))}
+              
+            </div>
+           
+          </div>
+          <hr/>
+          <div className="experience">
+            <div className="experienceLeftSide">
+              <Typography
+                variant="h6"
+                style={{
+                  marginTop: "30px",
+                  marginBottom: "15px",
+                }}
+              >
+                Education
+              </Typography>
+              {education?.map((i) => (
+                <div key={i.id}>
+                  <p className="experienceText">{i.location}  {i.degree}</p>
+                  <p className="experienceText">
+                    {i.startDate}-{i.endDate}
+                  </p>
+                </div>
+              ))}
+            </div>
+            
+            <div className="experienceRightSide">
+              {education?.map((i) => (
+                <div key={i.id}>
+                    <Typography
+                    variant="h6"
+                    style={{
+                      marginTop: "60px",
+                      marginBottom: "0",
+                      color:"rgb(38, 160, 244)"
+                    }}
+                    className="experienceRightSideText"
+                  >
+
+                    {i.degree}
+                   </Typography>
+                 <b> <Typography
+                    variant="h6"
+                    style={{
+                      marginTop: "0",
+                      marginBottom: "15px",
+                    }}
+                    className="experienceRightSideText"
+                  >
+                    {i.institutionName}
+                  </Typography></b>
+                  
+                </div>
+              ))}
+              
+            </div>
+            
+          </div>
+          <hr/>
         </Grid>
       </Grid>
     </div>

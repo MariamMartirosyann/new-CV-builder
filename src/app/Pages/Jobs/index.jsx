@@ -24,6 +24,7 @@ const Jobs = () => {
       location: "",
       startDate: "",
       endDate: "",
+      description:"",
     },
   });
   const onSubmit = (formData1) => {
@@ -34,6 +35,7 @@ const Jobs = () => {
       location: formData1.location,
       startDate: formData1.startDate,
       endDate: formData1.endDate,
+      description:formData1.description,
     };
     dispatch(addJobsInfo(newFormData));
     navigate("/experience");

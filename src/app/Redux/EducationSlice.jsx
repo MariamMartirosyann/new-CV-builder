@@ -4,16 +4,16 @@ const initialState = {
   list: [],
 };
 
-const jobsSlice = createSlice({
-  name: "jobsInfo",
+const educationSlice = createSlice({
+  name: "educationInfo",
   initialState,
   reducers: {
-    addJobsInfo: (state, action) => {
+    addEducation: (state, action) => {
       const newItem = {
         id:action.payload.id,
-        position: action.payload.position,
+        degree: action.payload.degree,
+        institutionName: action.payload.institutionName,
         location:action.payload.location,
-        company: action.payload.company,
         startDate: action.payload.startDate,
         endDate: action.payload.endDate,
         description:action.payload.description,
@@ -24,7 +24,7 @@ const jobsSlice = createSlice({
     addDiv:(state, { payload }) => {
       state.list = payload;
     },
-    updateJobsInfo: (state, { payload }) => {
+    updateEducation: (state, { payload }) => {
       const newList = state.list.map((item, id) => {
         if (item.id === payload.id) {
         return payload;
@@ -33,7 +33,7 @@ const jobsSlice = createSlice({
       });
       state.list=newList
     },
-    deleteJobsInfo:(state,{payload})=>{
+    deleteEducation:(state,{payload})=>{
       state.list=[
       ...state.list.filter((item)=>item.id!==payload.id)
     ]
@@ -41,6 +41,6 @@ const jobsSlice = createSlice({
   },
 });
 
-export const { addJobsInfo, addDiv, updateJobsInfo, deleteJobsInfo } = jobsSlice.actions;
+export const {  addEducation, addDiv,  updateEducation, deleteEducation } = educationSlice.actions;
 
-export default jobsSlice.reducer;
+export default educationSlice.reducer;

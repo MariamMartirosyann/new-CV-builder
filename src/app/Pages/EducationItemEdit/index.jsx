@@ -5,13 +5,13 @@ import { useForm } from "react-hook-form";
 import { FormProvider } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateJobsInfo} from "../../Redux/JobsSlice";
+import { updateEducation } from "../../Redux/EducationSlice";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import { Typography, Grid, Box } from "@mui/material";
 import "./style.css";
 import InputSubmit from "../../Shared/InputSubmit";
 
-const JobsEdit = () => {
+const EducationItemEdit = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -22,8 +22,8 @@ const JobsEdit = () => {
 
   const methods = useForm({
     defaultValues: {
-      position: "",
-      company: "",
+      degree: "",
+      institutionName: "",
       location: "",
       startDate: "",
       endDate: "",
@@ -33,8 +33,8 @@ const JobsEdit = () => {
   const onSubmit = (formData1) => {
     const newFormData = {
         id: id,
-        position: formData1.position,
-        company: formData1.company,
+        degree: formData1.degree,
+      institutionName: formData1.institutionName,
         location: formData1.location,
         startDate: formData1.startDate,
         endDate: formData1.endDate,
@@ -42,9 +42,9 @@ const JobsEdit = () => {
 
       };
     dispatch(
-        updateJobsInfo(newFormData)
+      updateEducation(newFormData)
     );
-    navigate("/experience");
+    navigate("/education");
   };
 
 
@@ -60,8 +60,8 @@ console.log(selectedJob,"selectedJob");
   useEffect(() => {
     if (selectedJob) {
       reset({
-        position: selectedJob.position,
-        company: selectedJob.company,
+        degree: selectedJob.degree,
+        institutionName: selectedJob.institutionName,
         number: selectedJob.number,
         location: selectedJob.location,
         startDate: selectedJob.startDate,
@@ -99,12 +99,12 @@ console.log(selectedJob,"selectedJob");
               {" "}
               <Box style={{ marginTop: "30px" }}>
                 <Input
-                  name="position"
+                  name="degree"
                   control={control}
-                  label={"Position"}
+                  label={"Degree"}
                   variant={"outlined"}
                   color={"primary"}
-                  helperText={"Enter your position"}
+                  helperText={"Enter your degree"}
                   errors={errors}
                   rules={{
                     required: {
@@ -122,12 +122,12 @@ console.log(selectedJob,"selectedJob");
             <Grid item lg={3}>
               <Box style={{ marginTop: "30px" }}>
                 <Input
-                  name="company"
+                  name="institutionName"
                   control={control}
-                  label={"Company"}
+                  label={"Name of institution"}
                   variant={"outlined"}
                   color={"primary"}
-                  helperText={"Enter your company"}
+                  helperText={"Enter your institution name"}
                   errors={errors}
                   rules={{
                     required: {
@@ -242,4 +242,4 @@ console.log(selectedJob,"selectedJob");
   );
 };
 
-export default JobsEdit;
+export default EducationItemEdit;

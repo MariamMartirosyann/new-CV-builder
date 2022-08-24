@@ -52,6 +52,7 @@ const sections = [
 const Sidebar = () => {
   return (
     <div className="sideBar">
+      <button className="downLoadBtn"> DownLoad</button>
       <Typography variant="h6" className="sideBarTitle">
         RESUME SECTIONS
       </Typography>

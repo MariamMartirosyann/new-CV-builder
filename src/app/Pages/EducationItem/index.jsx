@@ -1,29 +1,26 @@
-import React, {useEffect } from "react";
+import React from "react";
 import Input from "../../Shared/Input";
-import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FormProvider } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateJobsInfo} from "../../Redux/JobsSlice";
+import { useParams } from "react-router-dom";
+import { addEducation } from "../../Redux/EducationSlice";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import { Typography, Grid, Box } from "@mui/material";
 import "./style.css";
+import { nanoid } from "nanoid";
 import InputSubmit from "../../Shared/InputSubmit";
 
-const JobsEdit = () => {
+const EducationItem = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
-  
   const { id } = useParams();
-  const jobs = useSelector((state) => state.jobsInfo.list);
-  const selectedJob = jobs.find((item) => item.id === id);
 
   const methods = useForm({
     defaultValues: {
-      position: "",
-      company: "",
+      degree: "",
+      institutionName: "",
       location: "",
       startDate: "",
       endDate: "",
@@ -32,44 +29,23 @@ const JobsEdit = () => {
   });
   const onSubmit = (formData1) => {
     const newFormData = {
-        id: id,
-        position: formData1.position,
-        company: formData1.company,
-        location: formData1.location,
-        startDate: formData1.startDate,
-        endDate: formData1.endDate,
-        description:formData1.description,
-
-      };
-    dispatch(
-        updateJobsInfo(newFormData)
-    );
-    navigate("/experience");
+      id: nanoid(),
+      degree: formData1.degree,
+      institutionName: formData1.institutionName,
+      location: formData1.location,
+      startDate: formData1.startDate,
+      endDate: formData1.endDate,
+      description:formData1.description,
+    };
+    dispatch(addEducation(newFormData));
+    navigate("/education");
   };
-
 
   const {
     formState: { errors },
     handleSubmit,
-    reset,
     control,
   } = methods;
-
-  
-console.log(selectedJob,"selectedJob");
-  useEffect(() => {
-    if (selectedJob) {
-      reset({
-        position: selectedJob.position,
-        company: selectedJob.company,
-        number: selectedJob.number,
-        location: selectedJob.location,
-        startDate: selectedJob.startDate,
-        endDate: selectedJob.endDate,
-        description:selectedJob.description,
-      });
-    }
-  }, [reset, selectedJob]);
 
   return (
     <div className="contactInfo">
@@ -78,19 +54,18 @@ console.log(selectedJob,"selectedJob");
         variant="h3"
         style={{ marginLeft: "0", marginTop: "30px", marginBottom: "15px" }}
       >
-        Great! Let's edit your work experience {id}
+       Awesome! Now, what qualifications do you have?
       </Typography>
       <Typography
         variant="p"
         style={{
-          width: "200px",
+          width: "150px",
           marginLeft: "0",
           marginTop: "10px",
           marginBottom: "35px",
         }}
       >
-        Start with your most recent position and work backwards. Just add the
-        most recent and relevant positions if you have lots of experience.
+     Start with your most recent period of education and work backwards. If you have many, just add the most recent and relevant ones.
       </Typography>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} className="formStyle">
@@ -99,12 +74,12 @@ console.log(selectedJob,"selectedJob");
               {" "}
               <Box style={{ marginTop: "30px" }}>
                 <Input
-                  name="position"
+                  name="degree"
                   control={control}
-                  label={"Position"}
+                  label={"Degree"}
                   variant={"outlined"}
                   color={"primary"}
-                  helperText={"Enter your position"}
+                  helperText={"Enter your degree"}
                   errors={errors}
                   rules={{
                     required: {
@@ -122,12 +97,12 @@ console.log(selectedJob,"selectedJob");
             <Grid item lg={3}>
               <Box style={{ marginTop: "30px" }}>
                 <Input
-                  name="company"
+                  name="institutionName"
                   control={control}
-                  label={"Company"}
+                  label={"Name of institution"}
                   variant={"outlined"}
                   color={"primary"}
-                  helperText={"Enter your company"}
+                  helperText={"Enter your institution name"}
                   errors={errors}
                   rules={{
                     required: {
@@ -235,11 +210,11 @@ console.log(selectedJob,"selectedJob");
               }}
             />
           </Box>
-         <InputSubmit/>
+          <InputSubmit/>
         </form>
       </FormProvider>
     </div>
   );
 };
 
-export default JobsEdit;
+export default EducationItem ;
