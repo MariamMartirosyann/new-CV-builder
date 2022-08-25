@@ -17,8 +17,8 @@ const EducationItemEdit = () => {
   
   
   const { id } = useParams();
-  const jobs = useSelector((state) => state.jobsInfo.list);
-  const selectedJob = jobs.find((item) => item.id === id);
+  const education = useSelector((state) => state.educationInfo.list);
+  const selectedEducation = education.find((item) => item.id === id);
 
   const methods = useForm({
     defaultValues: {
@@ -56,20 +56,20 @@ const EducationItemEdit = () => {
   } = methods;
 
   
-console.log(selectedJob,"selectedJob");
+console.log(selectedEducation,"selectedEducation");
   useEffect(() => {
-    if (selectedJob) {
+    if (selectedEducation) {
       reset({
-        degree: selectedJob.degree,
-        institutionName: selectedJob.institutionName,
-        number: selectedJob.number,
-        location: selectedJob.location,
-        startDate: selectedJob.startDate,
-        endDate: selectedJob.endDate,
-        description:selectedJob.description,
+        degree: selectedEducation.degree,
+        institutionName: selectedEducation.institutionName,
+        number: selectedEducation.number,
+        location: selectedEducation.location,
+        startDate: selectedEducation.startDate,
+        endDate: selectedEducation.endDate,
+        description:selectedEducation.description,
       });
     }
-  }, [reset, selectedJob]);
+  }, [reset, selectedEducation]);
 
   return (
     <div className="contactInfo">

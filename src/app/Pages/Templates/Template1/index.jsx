@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Grid, Typography, Box } from "@mui/material";
-import Sidebar from "../../../../../Shared/Sidebar/Sidebar";
+import Sidebar from "../../../Shared/Sidebar/Sidebar";
 import "./style.css";
 
 const TemplateOne = () => {

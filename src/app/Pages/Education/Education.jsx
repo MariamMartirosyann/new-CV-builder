@@ -66,9 +66,9 @@ const Education = () => {
             <Grid className="container">
               <Grid className="item1">
                 <Typography variant="h6" style={{ marginLeft: "0" }}>
-                  position
+                 Degree
                 </Typography>
-                company startDate -endDate
+                Institution name startDate -endDate
               </Grid>
               <Grid className="item2">
                   &nbsp;
@@ -160,7 +160,7 @@ const Education = () => {
                 <Grid className="item2">
             
                   &nbsp;
-                  <Link to={`/educationItemEdit//${item.id}`}>
+                  <Link to={`/educationItemEdit/${item.id}`}>
                     <Edit />
                   </Link>
                   &nbsp;
