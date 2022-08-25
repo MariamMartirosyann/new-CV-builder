@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
-import TemplateOne from "./SliderItems/Template1";
+import TemplateOne from "../Template1";
 import One from "../../../../images/1.png";
 import Two from "../../../../images/10.png";
 import Three from "../../../../images/3.png";
@@ -34,32 +34,32 @@ function SimpleSlider() {
     <div>
       <Slider {...settings} className="slider">
         <div className="sliderItem">
-          <Link to="/templateOne">
+          <Link to="/templateTwo">
             <img className="img" src={One} alt="One" />
           </Link>
         </div>
         <div className="sliderItem">
-          <Link to="/templateOne">
+        <Link to="/templateTwo">
             <img className="img" src={Two} alt="Two" />
           </Link>
         </div>
         <div className="sliderItem">
-        <Link to="/templateOne">
+        <Link to="/templateTwo">
             <img className="img" src={Three} alt="Three" />
           </Link>
         </div>
         <div className="sliderItem">
-        <Link to="/templateOne">
+        <Link to="/templateTwo">
             <img className="img" src={Four} alt="Four" />
           </Link>
         </div>
         <div className="sliderItem">
-        <Link to="/templateOne">
+        <Link to="/templateTwo">
             <img className="img" src={Five} alt="Five" />
           </Link>
         </div>
         <div className="sliderItem">
-        <Link to="/templateOne">
+        <Link to="/templateTwo">
             <img className="img" src={Six} alt="Six" />
           </Link>
         </div>

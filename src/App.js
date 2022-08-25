@@ -12,9 +12,10 @@ import LanguagesAdd from "./app/Pages/Languages/LanguagesAdd";
 import LanguagesEdit from "./app/Pages/Languages/LanguagesEdit";
 import Objective from "./app/Pages/Objective/Objective";
 import Templates from "./app/Pages/Templates";
-import TemplateOne from "./app/Pages/Templates/Slider/SliderItems/Template1";
 import EducationItem from "./app/Pages/EducationItem";
 import EducationItemEdit from "./app/Pages/EducationItemEdit";
+import TemplateOne from "./app/Pages/Templates/Template1";
+import TemplateTwo from "./app/Pages/Templates/TemplateTwo/TemplateTwo";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="objective" element={<Objective />} />
           <Route path="templates" element={<Templates />} />
           <Route path="templateOne" element={<TemplateOne />} />
+          <Route path="templateTwo" element={<TemplateTwo />} />
         </Routes>
       </BrowserRouter>
  
