@@ -1,3 +1,5 @@
+const styles = StyleSheet.create({
+
 .main1 {
   width: 95vw;
   height: 100vh;
@@ -19,7 +21,18 @@
 }
 .rightSide {
 }
-
+.title{
+  margin-top: 15px;
+  margin-bottom: 15px
+}
+.title1{
+  margin-top: 15px;
+  margin-bottom: 5px
+}
+.text{
+  margin-top: 5px;
+  margin-bottom: 5px
+}
 .experience {
   display: flex;
   flex-direction: row;
