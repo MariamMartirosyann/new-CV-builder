@@ -9,6 +9,8 @@ import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
 import RadarRoundedIcon from '@mui/icons-material/RadarRounded';
 import "./style.css";
 import { Link } from "react-router-dom";
+import IosShareIcon from '@mui/icons-material/IosShare';
+
 
 const sections = [
   {
@@ -33,13 +35,13 @@ const sections = [
     id: 4,
     name: "Skills",
     to: "/skills-languages",
-    icon:  <FormatListBulletedRoundedIcon/>,
+    icon: <FormatListBulletedRoundedIcon />,
   },
   {
     id: 5,
     name: "Languages",
     to: "/skills-languages",
-    icon: <LanguageRoundedIcon/> ,
+    icon: <LanguageRoundedIcon />,
   },
   {
     id: 6,
@@ -52,8 +54,17 @@ const sections = [
 const Sidebar = () => {
   return (
     <div className="sideBar">
-      <button className="downLoadBtn"> DownLoad</button>
-      <Typography variant="h6" className="sideBarTitle">
+
+      <Typography variant="h6">
+        Here is your resume!
+      </Typography>
+
+      <p className="share">
+
+        <IosShareIcon className="shareIcon"/>Share it online
+      </p>
+      <hr  className="hr"/>
+      <Typography variant="p" className="sideBarTitle">
         RESUME SECTIONS
       </Typography>
       {sections.map((i) => (
