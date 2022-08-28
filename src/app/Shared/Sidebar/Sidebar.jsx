@@ -10,6 +10,28 @@ import RadarRoundedIcon from '@mui/icons-material/RadarRounded';
 import "./style.css";
 import { Link } from "react-router-dom";
 import IosShareIcon from '@mui/icons-material/IosShare';
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  FacebookIcon,
+  HatenaShareButton,
+  InstapaperShareButton,
+  LineShareButton,
+  LinkedinShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  OKShareButton,
+  PinterestShareButton,
+  PocketShareButton,
+  RedditShareButton,
+  TelegramShareButton,
+  TumblrShareButton,
+  TwitterShareButton,
+  ViberShareButton,
+  VKShareButton,
+  WhatsappShareButton,
+  WorkplaceShareButton
+} from "react-share";
 
 
 const sections = [
@@ -52,30 +74,33 @@ const sections = [
 ];
 
 const Sidebar = () => {
+
   return (
     <div className="sideBar">
 
       <Typography variant="h6">
         Here is your resume!
       </Typography>
-
+      <Link to="/shareRezume">
       <p className="share">
-
-        <IosShareIcon className="shareIcon"/>Share it online
+        <IosShareIcon className="shareIcon" />Share it online
       </p>
-      <hr  className="hr"/>
+      </Link>
+      <hr className="hr" />
       <Typography variant="p" className="sideBarTitle">
         RESUME SECTIONS
       </Typography>
-      {sections.map((i) => (
-        <Link to={i.to} key={i.id} className="textDecorationNone">
-          <div key={i.id} id={i.id} className="sidebarBtn">
-            <div className="iconDiv"> {i.icon}</div>
-            <div className="nameDiv"> {i.name}</div>
-          </div>
-        </Link>
-      ))}
-    </div>
+      {
+        sections.map((i) => (
+          <Link to={i.to} key={i.id} className="textDecorationNone">
+            <div key={i.id} id={i.id} className="sidebarBtn">
+              <div className="iconDiv"> {i.icon}</div>
+              <div className="nameDiv"> {i.name}</div>
+            </div>
+          </Link>
+        ))
+      }
+    </div >
   );
 };
 

@@ -16,6 +16,7 @@ import EducationItem from "./app/Pages/EducationItem";
 import EducationItemEdit from "./app/Pages/EducationItemEdit";
 import TemplateOne from "./app/Pages/Templates/Template1";
 import TemplateTwo from "./app/Pages/Templates/TemplateTwo/TemplateTwo";
+import ShareRezume from "./app/Pages/ShareRezume";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="templates" element={<Templates />} />
           <Route path="templateOne" element={<TemplateOne />} />
           <Route path="templateTwo" element={<TemplateTwo />} />
+          <Route path="shareRezume" element={<ShareRezume />} />
         </Routes>
       </BrowserRouter>
  
