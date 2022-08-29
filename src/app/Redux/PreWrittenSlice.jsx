@@ -78,6 +78,7 @@ const initialState = {
   list: preWrittenText,
   list1: preWrittenTextObjective ,
   showPreWrittenText: false,
+  showDownloadDiv:false,
 };
 
 const preWrittenSlice = createSlice({
@@ -87,9 +88,12 @@ const preWrittenSlice = createSlice({
     preWrittenTextState: (state, { payload }) => {
       state.showPreWrittenText = payload;
     },
+    preWrittenTextState: (state, { payload }) => {
+      state.showDownloadDiv = payload;
+    },
   },
 });
-export const { addPreWritten, deletePreWritten, preWrittenTextState } =
+export const { addPreWritten, deletePreWritten, preWrittenTextState, showDownloadDiv} =
   preWrittenSlice.actions;
 
 export default preWrittenSlice.reducer;

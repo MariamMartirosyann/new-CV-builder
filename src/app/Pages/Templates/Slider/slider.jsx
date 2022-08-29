@@ -34,27 +34,27 @@ function SimpleSlider() {
     <div>
       <Slider {...settings} className="slider">
         <div className="sliderItem">
-          <Link to="/templateTwo">
+          <Link to="/templateOne">
             <img className="img" src={One} alt="One" />
           </Link>
         </div>
         <div className="sliderItem">
-        <Link to="/templateTwo">
+        <Link to="/templateOne">
             <img className="img" src={Two} alt="Two" />
           </Link>
         </div>
         <div className="sliderItem">
-        <Link to="/templateTwo">
+        <Link to="/templateOne">
             <img className="img" src={Three} alt="Three" />
           </Link>
         </div>
         <div className="sliderItem">
-        <Link to="/templateTwo">
+        <Link to="/templateOne">
             <img className="img" src={Four} alt="Four" />
           </Link>
         </div>
         <div className="sliderItem">
-        <Link to="/templateTwo">
+        <Link to="/templateOne">
             <img className="img" src={Five} alt="Five" />
           </Link>
         </div>

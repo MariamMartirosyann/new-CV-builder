@@ -8,7 +8,7 @@ import ImageUploading from "react-images-uploading";
 import { addContactInfo } from "../../Redux/ContactInfoSlice";
 import { addImage } from "../../Redux/ImageSlice";
 import { Box, Typography, Grid } from "@mui/material";
-import Empty from "../../../images/empty.webp";
+
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import InputSubmit from "../../Shared/InputSubmit";
 import "./style.css";

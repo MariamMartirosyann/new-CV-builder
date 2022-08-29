@@ -22,9 +22,7 @@ const Objective = () => {
   const lastElement = preWrittenText[preWrittenText.length - 1];
   const El = lastElement?.objective;
   const ElIndex = lastElement?.index;
-  console.log("lastElement", lastElement);
-  console.log("El", El);
-  console.log("ElIndex", ElIndex);
+
 
   const [objective, setObjective] = useState("");
 

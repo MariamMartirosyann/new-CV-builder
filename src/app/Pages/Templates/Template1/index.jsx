@@ -4,8 +4,8 @@ import { Grid, Typography, Box } from "@mui/material";
 import Sidebar from "../../../Shared/Sidebar/Sidebar";
 import ReactDOM from "react-dom";
 import Pdf from "react-to-pdf";
-import "./style.css";
-import DownloadBtn from "../../../Shared/Sidebar/DownloadBtn";
+import  "./style.css";
+
 
 const TemplateOne = () => {
   const img = useSelector((state) => state.image.list);
@@ -26,11 +26,13 @@ const TemplateOne = () => {
 
   return (
     <div className="main1">
-      <div className="downLoad">  
-      
-      <Pdf targetRef={ref} filename="code-example.pdf">
-        {({ toPdf }) => <button className="downLoadBtn" onClick={toPdf}> DownLoad</button>}
-      </Pdf></div>
+      <div className="downLoad">
+        <Pdf targetRef={ref} filename="code-example.pdf">
+          {({ toPdf }) => (
+             <button onClick={toPdf} className="downLoadBtn">Generate Pdf</button>
+          )}
+        </Pdf>
+      </div>
 
       <Sidebar />
       <div ref={ref}>
@@ -282,39 +284,38 @@ const TemplateOne = () => {
                 ))}
               </div>
               <div className="experienceRightSide">
-
                 {experience?.map((i) => (
-
                   <div key={i.id}>
                     <Typography
                       variant="h6"
                       style={{
                         marginTop: "60px",
                         marginBottom: "0",
-                        color: "rgb(38, 160, 244)"
+                        color: "rgb(38, 160, 244)",
                       }}
                       className="experienceRightSideText"
                     >
                       {i.position}
                     </Typography>
-                    <b> <Typography
-                      variant="h6"
-                      style={{
-                        marginTop: "0",
-                        marginBottom: "15px",
-                      }}
-                      className="experienceRightSideText"
-                    >
-                      {i.company}
-                    </Typography></b>
+                    <b>
+                      {" "}
+                      <Typography
+                        variant="h6"
+                        style={{
+                          marginTop: "0",
+                          marginBottom: "15px",
+                        }}
+                        className="experienceRightSideText"
+                      >
+                        {i.company}
+                      </Typography>
+                    </b>
                     <div style={{ width: "100%" }}>
                       <p className="experienceText">{i.description}</p>
                     </div>
                   </div>
                 ))}
-
               </div>
-
             </div>
             <hr />
             <div className="experience">
@@ -330,7 +331,9 @@ const TemplateOne = () => {
                 </Typography>
                 {education?.map((i) => (
                   <div key={i.id}>
-                    <p className="experienceText">{i.location}  {i.degree}</p>
+                    <p className="experienceText">
+                      {i.location} {i.degree}
+                    </p>
                     <p className="experienceText">
                       {i.startDate}-{i.endDate}
                     </p>
@@ -346,29 +349,28 @@ const TemplateOne = () => {
                       style={{
                         marginTop: "60px",
                         marginBottom: "0",
-                        color: "rgb(38, 160, 244)"
+                        color: "rgb(38, 160, 244)",
                       }}
                       className="experienceRightSideText"
                     >
-
                       {i.degree}
                     </Typography>
-                    <b> <Typography
-                      variant="h6"
-                      style={{
-                        marginTop: "0",
-                        marginBottom: "15px",
-                      }}
-                      className="experienceRightSideText"
-                    >
-                      {i.institutionName}
-                    </Typography></b>
-
+                    <b>
+                      {" "}
+                      <Typography
+                        variant="h6"
+                        style={{
+                          marginTop: "0",
+                          marginBottom: "15px",
+                        }}
+                        className="experienceRightSideText"
+                      >
+                        {i.institutionName}
+                      </Typography>
+                    </b>
                   </div>
                 ))}
-
               </div>
-
             </div>
             <hr />
           </Grid>
@@ -379,3 +381,10 @@ const TemplateOne = () => {
 };
 
 export default TemplateOne;
+/* <Pdf targetRef={ref} filename="code-example.pdf">
+        {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+      </Pdf>
+      <button onClick={toPdf} className="downLoadBtn">
+              {" "}
+              DownLoad
+            </button>*/
