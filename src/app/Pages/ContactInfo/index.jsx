@@ -12,6 +12,8 @@ import { Box, Typography, Grid } from "@mui/material";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import InputSubmit from "../../Shared/InputSubmit";
 import "./style.css";
+import DatePickers, { MuiPicker } from "../../Shared/DatePicker";
+import DatePicker from "../../Shared/DatePicker";
 
 const ContactInfo = () => {
   const dispatch = useDispatch();
@@ -19,7 +21,6 @@ const ContactInfo = () => {
   const [images, setImages] = React.useState([]);
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
-  
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
     dispatch(addImage(imageList));
@@ -36,6 +37,7 @@ const ContactInfo = () => {
       phone: "",
       email: "",
       link: "",
+      dateOfBirth1: "",
     },
   });
 
@@ -349,6 +351,7 @@ const ContactInfo = () => {
               }}
             />
           </Box>
+          <MuiPicker label="ooooooooooooo" helperText="helperText"/>
           <InputSubmit />
         </form>
       </FormProvider>
@@ -357,3 +360,10 @@ const ContactInfo = () => {
 };
 
 export default ContactInfo;
+/*<Box style={{ width: "50%", margin: "10px 0" }}>
+            <DatePickers
+              name="dateOfBirth1"
+              helperText="Date of Birth"
+              label="Date of Birth1"
+            />
+          </Box>*/

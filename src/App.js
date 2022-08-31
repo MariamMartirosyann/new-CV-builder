@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-//import { PDFViewer } from '@react-pdf/renderer';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import "./App.css";
 import ContactInfo from "./app/Pages/ContactInfo";
 import Experience from "./app/Pages/Experience/Experience";
@@ -22,7 +23,7 @@ import ShareRezume from "./app/Pages/ShareRezume";
 function App() {
   return (
     <div>
-     
+     <LocalizationProvider dateAdapter={ AdapterDayjs}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ContactInfo />} />
@@ -42,7 +43,7 @@ function App() {
           <Route path="shareRezume" element={<ShareRezume />} />
         </Routes>
       </BrowserRouter>
- 
+      </LocalizationProvider>
     </div>
   );
 }

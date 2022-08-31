@@ -1,7 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux/es/exports";
 import { useLocation } from "react-router-dom";
-import { showDownloadDiv } from "../../Redux/PreWrittenSlice";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
@@ -13,28 +11,6 @@ import RadarRoundedIcon from "@mui/icons-material/RadarRounded";
 import "./style.css";
 import { Link } from "react-router-dom";
 import IosShareIcon from "@mui/icons-material/IosShare";
-import {
-  EmailShareButton,
-  FacebookShareButton,
-  FacebookIcon,
-  HatenaShareButton,
-  InstapaperShareButton,
-  LineShareButton,
-  LinkedinShareButton,
-  LivejournalShareButton,
-  MailruShareButton,
-  OKShareButton,
-  PinterestShareButton,
-  PocketShareButton,
-  RedditShareButton,
-  TelegramShareButton,
-  TumblrShareButton,
-  TwitterShareButton,
-  ViberShareButton,
-  VKShareButton,
-  WhatsappShareButton,
-  WorkplaceShareButton,
-} from "react-share";
 import { useMemo } from "react";
 
 const sections = [
@@ -78,6 +54,7 @@ const sections = [
 
 const Sidebar = () => {
   const pathName = useLocation().pathname;
+
   const showDownloadDivState = useMemo(
     () => pathName === "/templateOne" || pathName === "/templateTwo",
     [pathName]
