@@ -1,65 +1,75 @@
-import React, { useState } from "react";
-import { Stack } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { Controller, useFormContext } from "react-hook-form";
+//import moment from "moment";
+//import { Box, FormHelperText } from "@mui/material";
+import { DatePicker } from "antd";
+import "antd/dist/antd.css";
+//import { IDatePickerProps } from "./types";
 
-export const MuiPicker=(prop)=> {
-  const {label,fullWidth,helperText}=prop
-  const [selectedDate, setSelectedDate] = useState(null);
+
+const MyDatePicker = (props) => {
+  const {
+    //name,
+  //  label,
+    //rules=null,
+    //variant,
+   // errors,
+    //helperText,
+    //fullWidth = true,
+    onChange
+  } = props
+  const { control } = useFormContext();
   return (
-    <Stack spacing={4}>
-      <DatePicker
-        renderInput={(params) => <TextField {...params}  
-        label={label}
-        fullWidth={fullWidth}
-        helperText={helperText}/>}
-        value={selectedDate}
-        onChange={(newValue)=>{
-            setSelectedDate(newValue)
-        }}
-      />
-    </Stack>
+    
+    <>
+     
+          <DatePicker  onChange={onChange} />
+      
+    </>
   );
 };
 
+export default MyDatePicker;
 
+/*import { DatePicker, Space } from "antd";
+import { Controller } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
+import "antd/dist/antd.css";
+import React from "react";
 
+const onChange = (date, dateString) => {
+  console.log(date, dateString);
+};
 
-/*import * as React from "react";
-import dayjs from "dayjs";
-import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+const DatePiker = ({
+  name,
+  label,
+  rules = null,
+  variant,
+  errors,
+  helperText,
+  fullWidth = true,
+}) => {
+  const { control } = useFormContext();
+  return;
+  <Space direction="vertical">
+    <Controller
+      name={name}
+      control={control}
+      rules={rules}
+      render={({ field }) => <DatePicker {...field} onChange={onChange} />}
+    />
+  </Space>;
+};
 
-
-export default function DatePickers(props) {
-  const { name, label,helperText, fullWidth = true, onChange} = props;
-  const [value, setValue] = React.useState(dayjs());
-
-  return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Stack spacing={3}>
-        <DatePicker
-          disableFuture
-          name={name}
-          openTo="year"
-          views={["year", "month", "day"]}
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label={label}
-              fullWidth={fullWidth}
-              helperText={helperText}
-            />
-          )}
-        />
-      </Stack>
-    </LocalizationProvider>
-  );
-}*/
+export default DatePiker;
+/*<Space direction="vertical">
+    <DatePicker onChange={onChange} / >    
+  </Space>*/
+/*<Controller
+       control={control}
+        render={({field}) => (
+          <DatePicker {...field} onChange={onChange} />
+        )}
+      />
+   
+     */

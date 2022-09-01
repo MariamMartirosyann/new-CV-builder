@@ -14,6 +14,8 @@ import InputSubmit from "../../Shared/InputSubmit";
 import "./style.css";
 import DatePickers, { MuiPicker } from "../../Shared/DatePicker";
 import DatePicker from "../../Shared/DatePicker";
+import DatePiker from "../../Shared/DatePicker";
+import MyDatePicker from "../../Shared/DatePicker";
 
 const ContactInfo = () => {
   const dispatch = useDispatch();
@@ -351,7 +353,8 @@ const ContactInfo = () => {
               }}
             />
           </Box>
-          <MuiPicker label="ooooooooooooo" helperText="helperText"/>
+          
+        < MyDatePicker/>
           <InputSubmit />
         </form>
       </FormProvider>
