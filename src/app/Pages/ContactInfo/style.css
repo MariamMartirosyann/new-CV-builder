@@ -1,6 +1,10 @@
 .contactInfo{
-    margin: 0 120px;
+    justify-content: center;
 }
+
 .photoBtn{
     margin: 30px;
+}
+.ant-picker{    
+    width:100%; 
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../../Shared/Input";
 import { useForm } from "react-hook-form";
 import { FormProvider } from "react-hook-form";
@@ -8,25 +8,19 @@ import ImageUploading from "react-images-uploading";
 import { addContactInfo } from "../../Redux/ContactInfoSlice";
 import { addImage } from "../../Redux/ImageSlice";
 import { Box, Typography, Grid } from "@mui/material";
-
+import DatePicker from "../../Shared/DatePicker";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import InputSubmit from "../../Shared/InputSubmit";
 import "./style.css";
-import DatePickers, { MuiPicker } from "../../Shared/DatePicker";
-import DatePicker from "../../Shared/DatePicker";
-import DatePiker from "../../Shared/DatePicker";
-import MyDatePicker from "../../Shared/DatePicker";
+
+const maxNumber = 69;
 
 const ContactInfo = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [images, setImages] = React.useState([]);
-  const maxNumber = 69;
-  const onChange = (imageList, addUpdateIndex) => {
-    console.log(imageList, addUpdateIndex);
-    setImages(imageList);
-    dispatch(addImage(imageList));
-  };
+  const [images, setImages] = useState([]);
+
+
 
   const methods = useForm({
     defaultValues: {
@@ -39,191 +33,315 @@ const ContactInfo = () => {
       phone: "",
       email: "",
       link: "",
-      dateOfBirth1: "",
+      datePicker: "",
     },
   });
-
-  const onSubmit = (formData) => {
-    dispatch(addContactInfo(formData));
-    navigate("/experience");
-  };
-
+//Delete
   const {
     formState: { errors },
     handleSubmit,
     control,
   } = methods;
 
-  return (
-    <div className="contactInfo">
-      <Sidebar />
-      <Typography
-        variant="h3"
-        style={{ marginLeft: "0", marginTop: "30px", marginBottom: "15px" }}
-      >
-        Tell us a little about yourself
-      </Typography>
-      <Typography
-        variant="p"
-        style={{
-          width: "200px",
-          marginLeft: "0",
-          marginTop: "10px",
-          marginBottom: "35px",
-        }}
-      >
-        Let us know who you are, how employers can get in touch with you, and
-        what your profession is
-      </Typography>
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)} className="formStyle">
-          <Grid container spacing={1}>
-            <Grid item lg={3}>
-              {" "}
-              <Box style={{ width: "100%", marginTop: "10px" }}>
-                {" "}
-                <Input
-                  name="name"
-                  control={control}
-                  label={"Name"}
-                  variant={"outlined"}
-                  color={"primary"}
-                  helperText={"Enter your name"}
-                  errors={errors}
-                  rules={{
-                    required: {
-                      value: true,
-                      message: "required",
-                    },
-                    minLength: {
-                      value: 5,
-                      message: "Input more then 5 letters",
-                    },
-                  }}
-                />
-              </Box>
-              <Box style={{ width: "100%", marginTop: "10px" }}>
-                <Input
-                  name="surname"
-                  control={control}
-                  label={"Surname"}
-                  variant={"outlined"}
-                  color={"primary"}
-                  helperText={"Enter your surname"}
-                  errors={errors}
-                  rules={{
-                    required: {
-                      value: true,
-                      message: "required",
-                    },
-                    minLength: {
-                      value: 5,
-                      message: "Input more then 5 letters",
-                    },
-                  }}
-                />
-              </Box>
-            </Grid>
-            <Grid item lg={3}>
-              <Grid container style={{ margin: "15px" }}>
-                <Grid item>
-                  <div className="App">
-                    <ImageUploading
-                      multiple
-                      value={images}
-                      onChange={onChange}
-                      maxNumber={1}
-                      dataURLKey="data_url"
-                    >
-                      {({
-                        imageList,
-                        onImageUpload,
-                        onImageRemoveAll,
-                        onImageUpdate,
-                        onImageRemove,
-                        isDragging,
-                        dragProps,
-                      }) => (
-                        // write your building UI
-                        <div className="upload__image-wrapper">
-                          <button
-                            style={isDragging ? { color: "red" } : undefined}
-                            onClick={onImageUpload}
-                            {...dragProps}
-                          >
-                            Add Profile Photo
-                          </button>
-                          &nbsp;
-                          {imageList.map((image, index) => (
-                            <div key={index} className="image-item">
-                              <Grid container spacing={3}>
-                                <Grid item>
-                                  <img
-                                    src={image["data_url"]}
-                                    alt=""
-                                    width="100"
-                                  />
-                                </Grid>
-                                <Grid item>
-                                  <div className="image-item__btn-wrapper">
-                                    <button
-                                      onClick={() => onImageUpdate(index)}
-                                    >
-                                      Update
-                                    </button>
-                                    <br />
-                                    <button
-                                      onClick={() => onImageRemove(index)}
-                                    >
-                                      Delete
-                                    </button>
-                                  </div>
-                                </Grid>
-                              </Grid>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </ImageUploading>
-                  </div>
-                </Grid>
-                <Grid item></Grid>
-              </Grid>
-            </Grid>
-          </Grid>
+  const onChange = (imageList, addUpdateIndex) => {
+    setImages(imageList);
+    dispatch(addImage(imageList));
+  };
+  
+  const onSubmit = (formData) => {
+    dispatch(addContactInfo(formData));
+    navigate("/experience");
+  };
 
-          <Box style={{ width: "50%", marginTop: "10px" }}>
-            <Input
-              name="occupation"
-              control={control}
-              label={"Occupation"}
-              variant={"outlined"}
-              color={"primary"}
-              helperText={"Enter your occupation"}
-              errors={errors}
-              rules={{
-                required: {
-                  value: true,
-                  message: "required",
-                },
-                minLength: {
-                  value: 5,
-                  message: "Input more then 5 letters",
-                },
-              }}
-            />
+  return (
+    <Grid container className="contactInfo">
+      <Grid item lg={8} xs={8}>
+        <div>
+          <Typography
+            variant="h5"
+            style={{
+              marginTop: "30px",
+              marginBottom: "15px",
+            }}
+          >
+            Tell us a little about yourself
+          </Typography>
+          <Box style={{ width: "60%", marginTop: "10px" }} >
+            <p>
+              Let us know who you are, how employers can get in touch with you,
+              and what your profession is
+            </p>
           </Box>
-          <Grid container spacing={2}>
-            <Grid item lg={3}>
-              {" "}
-              <Box style={{ marginTop: "10px" }}>
+          <FormProvider {...methods}>
+            <form onSubmit={handleSubmit(onSubmit)} className="formStyle">
+              <Grid container spacing={1}>
+                <Grid item lg={3} xs={8}>
+                    <Input
+                      name="name"
+                      control={control}
+                      label={"Name"}
+                      variant={"outlined"}
+                      color={"primary"}
+                      helperText={"Enter your name"}
+                      errors={errors}
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "required",
+                        },
+                        minLength: {
+                          value: 5,
+                          message: "Input more then 5 letters",
+                        },
+                      }}
+                    />
+            
+                 
+                    <Input
+                      name="surname"
+                      control={control}
+                      label={"Surname"}
+                      variant={"outlined"}
+                      color={"primary"}
+                      helperText={"Enter your surname"}
+                      errors={errors}
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "required",
+                        },
+                        minLength: {
+                          value: 5,
+                          message: "Input more then 5 letters",
+                        },
+                      }}
+                    />
+                  
+                </Grid>
+                <Grid item lg={3} xs={8}>
+                  <Grid container style={{ margin: "15px" }}>
+                    <Grid item>
+                      <div className="App">
+                        <ImageUploading
+                          multiple
+                          value={images}
+                          onChange={onChange}
+                          maxNumber={1}
+                          dataURLKey="data_url"
+                        >
+                          {({
+                            imageList,
+                            onImageUpload,
+                            onImageRemoveAll,
+                            onImageUpdate,
+                            onImageRemove,
+                            isDragging,
+                            dragProps,
+                          }) => (
+                            <div className="upload__image-wrapper">
+                              <button
+                                style={
+                                  isDragging ? { color: "red" } : undefined
+                                }
+                                onClick={onImageUpload}
+                                {...dragProps}
+                              >
+                                Add Profile Photo
+                              </button>
+                              &nbsp;
+                              {imageList.map((image, index) => (
+                                <div key={index} className="image-item">
+                                  <Grid container spacing={3}>
+                                    <Grid item>
+                                      <img
+                                        src={image["data_url"]}
+                                        alt=""
+                                        width="100"
+                                      />
+                                    </Grid>
+                                    <Grid item>
+                                      <div className="image-item__btn-wrapper">
+                                        <button
+                                          onClick={() => onImageUpdate(index)}
+                                        >
+                                          Update
+                                        </button>
+                                        <br />
+                                        <button
+                                          onClick={() => onImageRemove(index)}
+                                        >
+                                          Delete
+                                        </button>
+                                      </div>
+                                    </Grid>
+                                  </Grid>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </ImageUploading>
+                      </div>
+                    </Grid>
+                    <Grid item></Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid container>
+                <Grid item lg={6} xs={8}>
+                  <Input
+                    name="occupation"
+                    control={control}
+                    label={"Occupation"}
+                    variant={"outlined"}
+                    color={"primary"}
+                    helperText={"Enter your occupation"}
+                    errors={errors}
+                    rules={{
+                      required: {
+                        value: true,
+                        message: "required",
+                      },
+                      minLength: {
+                        value: 5,
+                        message: "Input more then 5 letters",
+                      },
+                    }}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={2}>
+                <Grid item lg={3} xs={8}>
+                  {" "}
+                  <Box style={{ marginTop: "10px" }}>
+                    <Input
+                      name="nationality"
+                      control={control}
+                      label={"Nationality"}
+                      variant={"outlined"}
+                      color={"primary"}
+                      helperText={"Enter your nationality"}
+                      errors={errors}
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "required",
+                        },
+                        minLength: {
+                          value: 5,
+                          message: "Input more then 5 letters",
+                        },
+                      }}
+                    />
+                  </Box>
+                </Grid>
+                <Grid item lg={3} xs={8}>
+                  <Box style={{ marginTop: "10px" }}>
+                    <Input
+                      name="dateOfBirth"
+                      control={control}
+                      label={"Date of birth"}
+                      variant={"outlined"}
+                      color={"primary"}
+                      helperText={"Enter your Date of birth"}
+                      errors={errors}
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "required",
+                        },
+                        minLength: {
+                          value: 5,
+                          message: "Input more then 5 letters",
+                        },
+                      }}
+                    />
+                  </Box>
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item lg={6} xs={8}>
+                  
+                    <Input
+                      name="address"
+                      control={control}
+                      label={"Address"}
+                      variant={"outlined"}
+                      color={"primary"}
+                      helperText={"Enter your address"}
+                      errors={errors}
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "required",
+                        },
+                        minLength: {
+                          value: 5,
+                          message: "Input more then 5 letters",
+                        },
+                      }}
+                    />
+                 
+                </Grid>
+              </Grid>
+              <Grid container spacing={2}>
+                <Grid item lg={3} xs={8}>
+                  {" "}
+                  <Box style={{ marginTop: "10px" }}>
+                    <Input
+                      name="phone"
+                      control={control}
+                      label={"Phone"}
+                      variant={"outlined"}
+                      color={"primary"}
+                      helperText={"Enter your phone"}
+                      errors={errors}
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "required",
+                        },
+                        minLength: {
+                          value: 5,
+                          message: "Input more then 5 letters",
+                        },
+                      }}
+                    />
+                  </Box>
+                </Grid>
+                <Grid item lg={3} xs={8}>
+                  <Box style={{ marginTop: "10px" }}>
+                    <Input
+                      name="email"
+                      control={control}
+                      label={"Email"}
+                      variant={"outlined"}
+                      color={"primary"}
+                      helperText={"Enter your email"}
+                      errors={errors}
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "required",
+                        },
+                        minLength: {
+                          value: 5,
+                          message: "Input more then 5 letters",
+                        },
+                      }}
+                    />
+                  </Box>
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item lg={6} xs={8}>
                 <Input
-                  name="nationality"
+                  name="link"
                   control={control}
-                  label={"Nationality"}
+                  label={"Link"}
                   variant={"outlined"}
                   color={"primary"}
-                  helperText={"Enter your nationality"}
+                  helperText={"Enter your  linkedin link"}
                   errors={errors}
                   rules={{
                     required: {
@@ -236,137 +354,31 @@ const ContactInfo = () => {
                     },
                   }}
                 />
-              </Box>
-            </Grid>
-            <Grid item lg={3}>
-              <Box style={{ marginTop: "10px" }}>
-                <Input
-                  name="dateOfBirth"
+              </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item lg={6} xs={8}>
+                <DatePicker
                   control={control}
-                  label={"Date of birth"}
+                  name="datePicker"
                   variant={"outlined"}
-                  color={"primary"}
-                  helperText={"Enter your Date of birth"}
-                  errors={errors}
-                  rules={{
-                    required: {
-                      value: true,
-                      message: "required",
-                    },
-                    minLength: {
-                      value: 5,
-                      message: "Input more then 5 letters",
-                    },
-                  }}
+                  label={"DatePicker"}
+                  helperText={"helperText"}
                 />
-              </Box>
-            </Grid>
-          </Grid>
-          <Box style={{ width: "50%", marginTop: "10px" }}>
-            <Input
-              name="address"
-              control={control}
-              label={"Address"}
-              variant={"outlined"}
-              color={"primary"}
-              helperText={"Enter your address"}
-              errors={errors}
-              rules={{
-                required: {
-                  value: true,
-                  message: "required",
-                },
-                minLength: {
-                  value: 5,
-                  message: "Input more then 5 letters",
-                },
-              }}
-            />
-          </Box>
-          <Grid container spacing={2}>
-            <Grid item lg={3}>
-              {" "}
-              <Box style={{ marginTop: "10px" }}>
-                <Input
-                  name="phone"
-                  control={control}
-                  label={"Phone"}
-                  variant={"outlined"}
-                  color={"primary"}
-                  helperText={"Enter your phone"}
-                  errors={errors}
-                  rules={{
-                    required: {
-                      value: true,
-                      message: "required",
-                    },
-                    minLength: {
-                      value: 5,
-                      message: "Input more then 5 letters",
-                    },
-                  }}
-                />
-              </Box>
-            </Grid>
-            <Grid item lg={3}>
-              <Box style={{ marginTop: "10px" }}>
-                <Input
-                  name="email"
-                  control={control}
-                  label={"Email"}
-                  variant={"outlined"}
-                  color={"primary"}
-                  helperText={"Enter your email"}
-                  errors={errors}
-                  rules={{
-                    required: {
-                      value: true,
-                      message: "required",
-                    },
-                    minLength: {
-                      value: 5,
-                      message: "Input more then 5 letters",
-                    },
-                  }}
-                />
-              </Box>
-            </Grid>
-          </Grid>
-          <Box style={{ width: "50%", marginTop: "10px" }}>
-            <Input
-              name="link"
-              control={control}
-              label={"Link"}
-              variant={"outlined"}
-              color={"primary"}
-              helperText={"Enter your  linkedin link"}
-              errors={errors}
-              rules={{
-                required: {
-                  value: true,
-                  message: "required",
-                },
-                minLength: {
-                  value: 5,
-                  message: "Input more then 5 letters",
-                },
-              }}
-            />
-          </Box>
-          
-        < MyDatePicker/>
-          <InputSubmit />
-        </form>
-      </FormProvider>
-    </div>
+             </Grid>
+             </Grid>
+              <InputSubmit />
+            </form>
+          </FormProvider>
+        </div>
+      </Grid>
+      <Grid item lg={4} xs={4}>
+       
+        <Sidebar />
+      </Grid>
+    </Grid>
   );
 };
 
 export default ContactInfo;
-/*<Box style={{ width: "50%", margin: "10px 0" }}>
-            <DatePickers
-              name="dateOfBirth1"
-              helperText="Date of Birth"
-              label="Date of Birth1"
-            />
-          </Box>*/
+
