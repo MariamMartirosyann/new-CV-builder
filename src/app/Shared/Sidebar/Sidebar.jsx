@@ -68,10 +68,10 @@ const Sidebar = () => {
         <div className="sideBar">
           {showDownloadDivState ? (
             <>
-              <Typography variant="h6" className="rezume">
+              <Typography variant="h6" className="resume">
                 Here is your resume!
               </Typography>
-              <Link to="/shareRezume">
+              <Link to="/shareResume">
                 <p className="share">
                   <IosShareIcon className="shareIcon" />
                   Share it online
@@ -97,10 +97,10 @@ const Sidebar = () => {
         <div className="sideBarSmall">
           {showDownloadDivState ? (
             <>
-              <Typography variant="h6" className="rezume">
+              <Typography variant="h6" className="resume">
                 Here is your resume!
               </Typography>
-              <Link to="/shareRezume">
+              <Link to="/shareResume">
                 <p className="share">
                   <IosShareIcon className="shareIcon" />
                   Share it online

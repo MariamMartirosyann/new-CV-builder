@@ -1,10 +1,15 @@
-.contactInfo{
-    justify-content: center;
-}
 
 .photoBtn{
     margin: 30px;
 }
 .ant-picker{    
     width:100%; 
+}
+.imageBtn{
+    width:170%
+}
+.imageBtnSmall{
+    width:360%;
+    height: 50px;
+    justify-content: center;
 }

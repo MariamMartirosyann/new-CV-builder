@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Input from "../../Shared/Input";
-import { useForm } from "react-hook-form";
-import { FormProvider } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import ImageUploading from "react-images-uploading";
 import { addContactInfo } from "../../Redux/ContactInfoSlice";
@@ -12,7 +12,7 @@ import DatePicker from "../../Shared/DatePicker";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import InputSubmit from "../../Shared/InputSubmit";
 import "./style.css";
-
+import "../../../App.css";
 const maxNumber = 69;
 
 const ContactInfo = () => {
@@ -20,7 +20,7 @@ const ContactInfo = () => {
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
 
-
+  const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
 
   const methods = useForm({
     defaultValues: {
@@ -36,7 +36,7 @@ const ContactInfo = () => {
       datePicker: "",
     },
   });
-//Delete
+
   const {
     formState: { errors },
     handleSubmit,
@@ -47,79 +47,78 @@ const ContactInfo = () => {
     setImages(imageList);
     dispatch(addImage(imageList));
   };
-  
+
   const onSubmit = (formData) => {
     dispatch(addContactInfo(formData));
     navigate("/experience");
   };
 
   return (
-    <Grid container className="contactInfo">
+    <Grid
+      container
+      className={isMediumScreen ? "contactInfoSmall" : "contactInfo"}
+    >
       <Grid item lg={8} xs={8}>
         <div>
-          <Typography
-            variant="h5"
-            style={{
-              marginTop: "30px",
-              marginBottom: "15px",
-            }}
-          >
-            Tell us a little about yourself
-          </Typography>
-          <Box style={{ width: "60%", marginTop: "10px" }} >
-            <p>
+          <div className="marginTB3015">
+            <Typography variant="h5" className="titleBig">
+              Tell us a little about yourself
+            </Typography>
+          </div>
+
+          <div className={isMediumScreen ? "smallTitleSmall" : "smallTitle"}>
+            <Typography variant="p">
               Let us know who you are, how employers can get in touch with you,
               and what your profession is
-            </p>
-          </Box>
+            </Typography>
+          </div>
+
           <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)} className="formStyle">
+            <form onSubmit={handleSubmit(onSubmit)} >
               <Grid container spacing={1}>
                 <Grid item lg={3} xs={8}>
-                    <Input
-                      name="name"
-                      control={control}
-                      label={"Name"}
-                      variant={"outlined"}
-                      color={"primary"}
-                      helperText={"Enter your name"}
-                      errors={errors}
-                      rules={{
-                        required: {
-                          value: true,
-                          message: "required",
-                        },
-                        minLength: {
-                          value: 5,
-                          message: "Input more then 5 letters",
-                        },
-                      }}
-                    />
-            
-                 
-                    <Input
-                      name="surname"
-                      control={control}
-                      label={"Surname"}
-                      variant={"outlined"}
-                      color={"primary"}
-                      helperText={"Enter your surname"}
-                      errors={errors}
-                      rules={{
-                        required: {
-                          value: true,
-                          message: "required",
-                        },
-                        minLength: {
-                          value: 5,
-                          message: "Input more then 5 letters",
-                        },
-                      }}
-                    />
-                  
+                  <Input
+                    name="name"
+                    control={control}
+                    label={"Name"}
+                    variant={"outlined"}
+                    color={"primary"}
+                    helperText={"Enter your name"}
+                    errors={errors}
+                    rules={{
+                      required: {
+                        value: true,
+                        message: "required",
+                      },
+                      minLength: {
+                        value: 5,
+                        message: "Input more then 5 letters",
+                      },
+                    }}
+                  />
+
+                  <Input
+                    name="surname"
+                    control={control}
+                    label={"Surname"}
+                    variant={"outlined"}
+                    color={"primary"}
+                    helperText={"Enter your surname"}
+                    errors={errors}
+                    rules={{
+                      required: {
+                        value: true,
+                        message: "required",
+                      },
+                      minLength: {
+                        value: 5,
+                        message: "Input more then 5 letters",
+                      },
+                    }}
+                  />
                 </Grid>
                 <Grid item lg={3} xs={8}>
-                  <Grid container style={{ margin: "15px" }}>
+                  <Grid container className={isMediumScreen ? "margin015Small" : "margin015"}>
                     <Grid item>
                       <div className="App">
                         <ImageUploading
@@ -140,6 +139,7 @@ const ContactInfo = () => {
                           }) => (
                             <div className="upload__image-wrapper">
                               <button
+                              className={isMediumScreen ? "imageBtnSmall":"imageBtn"}
                                 style={
                                   isDragging ? { color: "red" } : undefined
                                 }
@@ -261,33 +261,31 @@ const ContactInfo = () => {
               </Grid>
               <Grid container>
                 <Grid item lg={6} xs={8}>
-                  
-                    <Input
-                      name="address"
-                      control={control}
-                      label={"Address"}
-                      variant={"outlined"}
-                      color={"primary"}
-                      helperText={"Enter your address"}
-                      errors={errors}
-                      rules={{
-                        required: {
-                          value: true,
-                          message: "required",
-                        },
-                        minLength: {
-                          value: 5,
-                          message: "Input more then 5 letters",
-                        },
-                      }}
-                    />
-                 
+                  <Input
+                    name="address"
+                    control={control}
+                    label={"Address"}
+                    variant={"outlined"}
+                    color={"primary"}
+                    helperText={"Enter your address"}
+                    errors={errors}
+                    rules={{
+                      required: {
+                        value: true,
+                        message: "required",
+                      },
+                      minLength: {
+                        value: 5,
+                        message: "Input more then 5 letters",
+                      },
+                    }}
+                  />
                 </Grid>
               </Grid>
               <Grid container spacing={2}>
                 <Grid item lg={3} xs={8}>
                   {" "}
-                  <Box style={{ marginTop: "10px" }}>
+                  <Box className="marginTop10">
                     <Input
                       name="phone"
                       control={control}
@@ -310,7 +308,7 @@ const ContactInfo = () => {
                   </Box>
                 </Grid>
                 <Grid item lg={3} xs={8}>
-                  <Box style={{ marginTop: "10px" }}>
+                  <Box className="marginTop10">
                     <Input
                       name="email"
                       control={control}
@@ -335,45 +333,44 @@ const ContactInfo = () => {
               </Grid>
               <Grid container>
                 <Grid item lg={6} xs={8}>
-                <Input
-                  name="link"
-                  control={control}
-                  label={"Link"}
-                  variant={"outlined"}
-                  color={"primary"}
-                  helperText={"Enter your  linkedin link"}
-                  errors={errors}
-                  rules={{
-                    required: {
-                      value: true,
-                      message: "required",
-                    },
-                    minLength: {
-                      value: 5,
-                      message: "Input more then 5 letters",
-                    },
-                  }}
-                />
-              </Grid>
+                  <Input
+                    name="link"
+                    control={control}
+                    label={"Link"}
+                    variant={"outlined"}
+                    color={"primary"}
+                    helperText={"Enter your  linkedin link"}
+                    errors={errors}
+                    rules={{
+                      required: {
+                        value: true,
+                        message: "required",
+                      },
+                      minLength: {
+                        value: 5,
+                        message: "Input more then 5 letters",
+                      },
+                    }}
+                  />
+                </Grid>
               </Grid>
               <Grid container>
                 <Grid item lg={6} xs={8}>
-                <DatePicker
-                  control={control}
-                  name="datePicker"
-                  variant={"outlined"}
-                  label={"DatePicker"}
-                  helperText={"helperText"}
-                />
-             </Grid>
-             </Grid>
+                  <DatePicker
+                    control={control}
+                    name="datePicker"
+                    variant={"outlined"}
+                    label={"DatePicker"}
+                    helperText={"helperText"}
+                  />
+                </Grid>
+              </Grid>
               <InputSubmit />
             </form>
           </FormProvider>
         </div>
       </Grid>
       <Grid item lg={4} xs={4}>
-       
         <Sidebar />
       </Grid>
     </Grid>
@@ -381,4 +378,3 @@ const ContactInfo = () => {
 };
 
 export default ContactInfo;
-

@@ -2,6 +2,7 @@ import React from "react";
 import { Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { useFormContext } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 import "./style.css";
 import { height } from "@mui/system";
 
@@ -9,38 +10,38 @@ const Input = (props) => {
   const {
     name,
     label,
-    rules=null,
+    rules = null,
     variant,
-    errors,
     helperText,
     fullWidth = true,
-    onChange
-  } = props
-  const { control } = useFormContext();
+    onChange,
+  } = props;
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
   return (
-    
     <>
       <Controller
-       className="input"
+        className="input"
         name={name}
         control={control}
         rules={rules}
         onChange={onChange}
-        render={({field}) => (
+        render={({ field }) => (
           <TextField
-          {...field}
+            {...field}
             label={label}
             variant={variant}
             fullWidth={fullWidth}
             helperText={helperText}
-           
           />
         )}
       />
-    {errors?.[name]?.message && <p>{errors[name].message}</p>}
-     
+      <ErrorMessage errors={errors} name={name} />
     </>
   );
 };
 
 export default Input;
+

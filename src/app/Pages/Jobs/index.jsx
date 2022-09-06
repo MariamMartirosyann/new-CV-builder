@@ -2,17 +2,20 @@ import React from "react";
 import Input from "../../Shared/Input";
 import { useForm } from "react-hook-form";
 import { FormProvider } from "react-hook-form";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 import { addJobsInfo } from "../../Redux/JobsSlice";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
 import { Typography, Grid, Box } from "@mui/material";
-import "./style.css";
 import { nanoid } from "nanoid";
 import InputSubmit from "../../Shared/InputSubmit";
+import "./style.css";
+import "../../../App.css";
 
 const Jobs = () => {
+  const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -24,7 +27,7 @@ const Jobs = () => {
       location: "",
       startDate: "",
       endDate: "",
-      description:"",
+      description: "",
     },
   });
   const onSubmit = (formData1) => {
@@ -35,7 +38,7 @@ const Jobs = () => {
       location: formData1.location,
       startDate: formData1.startDate,
       endDate: formData1.endDate,
-      description:formData1.description,
+      description: formData1.description,
     };
     dispatch(addJobsInfo(newFormData));
     navigate("/experience");
@@ -48,32 +51,27 @@ const Jobs = () => {
   } = methods;
 
   return (
-    <div className="contactInfo">
-      <Sidebar />
-      <Typography
-        variant="h3"
-        style={{ marginLeft: "0", marginTop: "30px", marginBottom: "15px" }}
-      >
-        Great! Let's fill out your work experience next
-      </Typography>
-      <Typography
-        variant="p"
-        style={{
-          width: "200px",
-          marginLeft: "0",
-          marginTop: "10px",
-          marginBottom: "35px",
-        }}
-      >
-        Start with your most recent position and work backwards. Just add the
-        most recent and relevant positions if you have lots of experience.
-      </Typography>
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)} className="formStyle">
-          <Grid container spacing={2}>
-            <Grid item lg={3}>
-              {" "}
-              <Box style={{ marginTop: "30px" }}>
+    <Grid
+      container
+      className={isMediumScreen ? "contactInfoSmall" : "contactInfo"}
+    >
+      <Grid item lg={8} xs={8}>
+        <div className="marginTB3015">
+          <Typography variant="h5" className="titleBig">
+            Great! Let's fill out your work experience next
+          </Typography>
+        </div>
+        <div className={isMediumScreen ? "smallTitleSmall" : "smallTitle"}>
+          <Typography variant="p">
+            Start with your most recent position and work backwards. Just add
+            the most recent and relevant positions if you have lots of
+            experience.
+          </Typography>
+        </div>
+        <FormProvider {...methods}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid container spacing={1}  className="marginTop10">
+              <Grid item lg={3} xs={8}>
                 <Input
                   name="position"
                   control={control}
@@ -93,10 +91,8 @@ const Jobs = () => {
                     },
                   }}
                 />
-              </Box>
-            </Grid>
-            <Grid item lg={3}>
-              <Box style={{ marginTop: "30px" }}>
+              </Grid>
+              <Grid item lg={3} xs={8} className="marginTop10">
                 <Input
                   name="company"
                   control={control}
@@ -116,34 +112,32 @@ const Jobs = () => {
                     },
                   }}
                 />
-              </Box>
+              </Grid>
             </Grid>
-          </Grid>
-          <Box style={{ width: "50%", marginTop: "20px" }}>
-            <Input
-              name="location"
-              control={control}
-              label={"Location (city/state)"}
-              variant={"outlined"}
-              color={"primary"}
-              helperText={"Enter location"}
-              errors={errors}
-              rules={{
-                required: {
-                  value: true,
-                  message: "required",
-                },
-                minLength: {
-                  value: 5,
-                  message: "Input more then 5 letters",
-                },
-              }}
-            />
-          </Box>
-          <Grid container spacing={2}>
-            <Grid item lg={3}>
-              {" "}
-              <Box style={{ marginTop: "20px" }}>
+            <Grid item lg={6} xs={8} className="marginTop10">
+              <Input
+              className="marginTop10"
+                name="location"
+                control={control}
+                label={"Location (city/state)"}
+                variant={"outlined"}
+                color={"primary"}
+                helperText={"Enter location"}
+                errors={errors}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "required",
+                  },
+                  minLength: {
+                    value: 5,
+                    message: "Input more then 5 letters",
+                  },
+                }}
+              />
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item lg={3} xs={8} className="marginTop10">
                 <Input
                   name="startDate"
                   control={control}
@@ -163,10 +157,8 @@ const Jobs = () => {
                     },
                   }}
                 />
-              </Box>
-            </Grid>
-            <Grid item lg={3}>
-              <Box style={{ marginTop: "20px" }}>
+              </Grid>
+              <Grid item lg={3} xs={8} className="marginTop10">
                 <Input
                   name="endDate"
                   control={control}
@@ -186,35 +178,39 @@ const Jobs = () => {
                     },
                   }}
                 />
-              </Box>
+              </Grid>
             </Grid>
-          </Grid>
-          <Box style={{ width: "50%", marginTop: "20px" }}>
-            <Input
-              name="description"
-              control={control}
-              label={"Description"}
-              variant={"outlined"}
-              color={"primary"}
-              helperText={"Enter description"}
-              errors={errors}
-              style={{ height: "200px" }}
-              rules={{
-                required: {
-                  value: true,
-                  message: "required",
-                },
-                minLength: {
-                  value: 5,
-                  message: "Input more then 5 letters",
-                },
-              }}
-            />
-          </Box>
-          <InputSubmit/>
-        </form>
-      </FormProvider>
-    </div>
+            <Grid item lg={6} xs={8} className="marginTop10">
+              <Input
+                name="description"
+                control={control}
+                label={"Description"}
+                variant={"outlined"}
+                color={"primary"}
+                helperText={"Enter description"}
+                errors={errors}
+                style={{ height: "200px" }}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "required",
+                  },
+                  minLength: {
+                    value: 5,
+                    message: "Input more then 5 letters",
+                  },
+                }}
+              />
+            </Grid>
+            <InputSubmit />
+          </form>
+        </FormProvider>
+      </Grid>
+      <Grid item lg={4} xs={4}>
+       
+        <Sidebar />
+      </Grid>
+    </Grid>
   );
 };
 
