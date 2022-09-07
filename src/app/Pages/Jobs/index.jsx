@@ -70,8 +70,10 @@ const Jobs = () => {
         </div>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={1}  className="marginTop10">
-              <Grid item lg={3} xs={8}>
+            <Grid container spacing={1}>
+           
+              <Grid item lg={3} xs={8} >
+              <Box className="marginTop10">
                 <Input
                   name="position"
                   control={control}
@@ -91,8 +93,11 @@ const Jobs = () => {
                     },
                   }}
                 />
+                </Box>
               </Grid>
-              <Grid item lg={3} xs={8} className="marginTop10">
+            
+              <Grid item lg={3} xs={8} >
+              <Box className="marginTop10">
                 <Input
                   name="company"
                   control={control}
@@ -112,9 +117,11 @@ const Jobs = () => {
                     },
                   }}
                 />
+                </Box>
               </Grid>
             </Grid>
-            <Grid item lg={6} xs={8} className="marginTop10">
+            <Grid item lg={6} xs={8}>
+            <Box className="marginTop10">
               <Input
               className="marginTop10"
                 name="location"
@@ -135,9 +142,11 @@ const Jobs = () => {
                   },
                 }}
               />
+              </Box>
             </Grid>
             <Grid container spacing={2}>
-              <Grid item lg={3} xs={8} className="marginTop10">
+              <Grid item lg={3} xs={8}>
+              <Box className="marginTop10">
                 <Input
                   name="startDate"
                   control={control}
@@ -157,8 +166,10 @@ const Jobs = () => {
                     },
                   }}
                 />
+                </Box>
               </Grid>
-              <Grid item lg={3} xs={8} className="marginTop10">
+              <Grid item lg={3} xs={8} >
+              <Box className="marginTop10">
                 <Input
                   name="endDate"
                   control={control}
@@ -178,9 +189,11 @@ const Jobs = () => {
                     },
                   }}
                 />
+                </Box>
               </Grid>
             </Grid>
-            <Grid item lg={6} xs={8} className="marginTop10">
+            <Grid item lg={6} xs={8}>
+            <Box className="marginTop10">
               <Input
                 name="description"
                 control={control}
@@ -201,6 +214,7 @@ const Jobs = () => {
                   },
                 }}
               />
+              </Box>
             </Grid>
             <InputSubmit />
           </form>

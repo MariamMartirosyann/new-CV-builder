@@ -2,14 +2,16 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import { Typography, Grid, Box } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 import { deleteJobsInfo } from "../../Redux/JobsSlice";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
+import InputSubmit from "../../Shared/InputSubmit";
 import { ReactComponent as Delete } from "../../../icons/delete.svg";
 import { ReactComponent as Edit } from "../../../icons/edit.svg";
+import "../../../App.css";
 import "./style.css";
-import "../../../App.css"
-import InputSubmit from "../../Shared/InputSubmit";
+
+
 
 const Experience = () => {
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
@@ -150,7 +152,6 @@ const Experience = () => {
                   {" "}
                   + Add Another
                 </button>
-                {/* </Link> */}
               
             
             <div className={isMediumScreen? "btnDivSmall" : "btnDiv"}>
