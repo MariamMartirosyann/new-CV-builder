@@ -36,13 +36,12 @@
   width: 70%;
   margin: 10px 0;
 }
-.marginTopBottom30 {
-  margin-top: 30px;
-  margin-bottom: 30px;
+.marginTopB30 {
+  margin-top: 30px
 }
 .container {
   width: 55%;
-  height: 100px;
+  height: 80px;
   border: 1px solid grey;
   background: rgba(209, 209, 209, 0.3);
   display: flex;
@@ -53,7 +52,7 @@
 }
 .add {
   width: 55%;
-  height: 100px;
+  height: 80px;
   border: 1px solid grey;
   background: white;
   color: rgba(59, 59, 239, 0.4);
