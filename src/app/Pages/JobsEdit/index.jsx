@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
-import Input from "../../Shared/Input";
-import { useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { FormProvider } from "react-hook-form";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useForm, FormProvider} from "react-hook-form";
 import { useMediaQuery } from "react-responsive";
+import { Typography, Grid, Box } from "@mui/material";
 import { updateJobsInfo } from "../../Redux/JobsSlice";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
-import { Typography, Grid, Box } from "@mui/material";
-import "./style.css";
 import InputSubmit from "../../Shared/InputSubmit";
+import Input from "../../Shared/Input";
+import "../../../App.css"
+
+
+
 
 const JobsEdit = () => {
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
@@ -87,10 +88,10 @@ const JobsEdit = () => {
           </Typography>
         </div>
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)} className="formStyle">
+          <form onSubmit={handleSubmit(onSubmit)} >
             <Grid container spacing={2}>
               <Grid item lg={3} xs={8}>
-                {" "}
+                
                 <Box className="marginTop10">
                   <Input
                     name="position"
