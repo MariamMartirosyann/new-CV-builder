@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import videoBg from "../../../../assets/main.mp4"
+
+
+const TemplateTwo = () => {
 
 
 
-const TemplateTwo=()=>{
+  return (
 
+    <>
+    <video  src={videoBg} autoPlay loop muted width="100%" height="70%"/>
 
   
-    return (
+    </>
 
-      <div className="App">
-      22222222222222222222222222222222222222222222222222222222222222222222222
-      </div>
-   
-    );
-  }
-  export default TemplateTwo
+  );
+}
+export default TemplateTwo

@@ -192,12 +192,12 @@ const SkillsLanguages = () => {
               </Typography>
             </div>
             <Grid container>
-              <Grid item lg={6} xs={8}>
+              <Grid item lg={8} xs={8}>
                 <Typography variant="h6" className="marginTopBottom30">
                   Experience
                 </Typography>
               </Grid>
-              <Grid item lg={6} xs={8}>
+              <Grid item lg={8} xs={8}>
               <Box className="showPrewritten">
                     <Typography variant="p" onClick={showPrewritten}>
                       <Add /> Add pre-written text
@@ -208,13 +208,10 @@ const SkillsLanguages = () => {
 
             <FormProvider {...methods}>
               <form onSubmit={handleSubmit(onSubmit)} className="formStyle">
-                <Box
-                  style={{
-                    width: "50%",
-                    marginTop: "10px",
+              <Grid item lg={8} xs={8} style={{
                     position: "relative",
-                  }}
-                >
+                  }}>
+              
                   <Input
                     name="skills"
                     control={control}
@@ -244,7 +241,7 @@ const SkillsLanguages = () => {
                       />
                     </div>
                   ))}
-                </Box>
+                </Grid>
               </form>
             </FormProvider>
            

@@ -1,34 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { FormProvider } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useForm,  FormProvider } from "react-hook-form";
+import { useNavigate, useParams} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { languageAbilityLevel } from "../../Redux/LanguagesSlice";
+import { useMediaQuery } from "react-responsive";
 import {
   Typography,
-  Box,
+  Grid,
   Radio,
   RadioGroup,
   FormControlLabel,
 } from "@mui/material";
+import { languageAbilityLevel } from "../../Redux/LanguagesSlice";
+import { updateLanguageLevel } from "../../Redux/LanguagesSlice";
+import Sidebar from "../../Shared/Sidebar/Sidebar";
 import Input from "../../Shared/Input";
 import InputSubmit from "../../Shared/InputSubmit";
-import { updateLanguageLevel } from "../../Redux/LanguagesSlice";
-import { nanoid } from "nanoid";
 import "./style.css";
 
 const LanguagesEdit = () => {
   const [isActive, setIsActive] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
   const { id } = useParams();
   const levelList = languageAbilityLevel;
   const languages = useSelector((state) => state.languagesInfo.list);
   const selectedLanguage = languages.find((item) => item.id === id);
-  console.log("languages", languages);
-  console.log("levelList", levelList);
-  console.log("selectedLanguage", selectedLanguage);
+
 
   const methods = useForm({
     defaultValues: {
@@ -70,118 +68,115 @@ const LanguagesEdit = () => {
   }, [reset, selectedLanguage]);
 
   return (
-    <div className="main">
-      <Typography
-        variant="h3"
-        style={{ marginLeft: "0", marginTop: "30px", marginBottom: "15px" }}
-      >
-        Speak multiple languages?{id}
-      </Typography>
-      <Typography
-        variant="p"
-        style={{
-          width: "200px",
-          marginLeft: "0",
-          marginTop: "10px",
-          marginBottom: "35px",
-        }}
-      >
-        Add your languages and levels of ability here (only if you speak more
-        than one language).
-      </Typography>
+    <Grid
+    container
+    className={isMediumScreen ? "contactInfoSmall" : "contactInfo"}
+
+  >
+    <Grid item lg={8} xs={8}>
+      <div className="marginTB3015">
+        <Typography variant="h5" className="titleBig">
+          Speak multiple languages? {id}
+        </Typography>
+      </div>
+      <div className={isMediumScreen ? "smallTitleSmall" : "smallTitle"}>
+        <Typography variant="p">
+          Add your languages and levels of ability here (only if you speak more
+          than one language).
+        </Typography>
+      </div>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} className="formStyle">
-          <Box style={{ width: "60%", marginTop: "10px" }}>
-            <Input
-              name="language"
-              control={control}
-              label={"Language"}
-              variant={"outlined"}
-              color={"primary"}
-              helperText={"e g Armenian"}
-              errors={errors}
-              rules={{
-                required: {
-                  value: true,
-                  message: "required",
-                },
-                minLength: {
-                  value: 5,
-                  message: "Input more then 5 letters",
-                },
+          <Grid container >
+            <Grid item lg={8} xs={8}>
+              <Input
+                name="language"
+                control={control}
+                label={"Language"}
+                variant={"outlined"}
+                color={"primary"}
+                helperText={"e g Armenian"}
+                errors={errors}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "required",
+                  },
+                  minLength: {
+                    value: 5,
+                    message: "Input more then 5 letters",
+                  },
+                }}
+              />
+            </Grid>
+          </Grid>
+          <div className="marginTB3015">
+            <Typography variant="h5" className="titleBig">
+              Ability level
+            </Typography>
+          </div>
+          <Grid container>
+            <RadioGroup
+              row
+              aria-label="position"
+              onChange={(e) => {
+                setValue("languageLevel", String(e.target.value));
               }}
-            />
-          </Box>
-          <Typography
-            variant="h6"
-            style={{
-              width: "200px",
-              marginLeft: "0",
-              marginTop: "20px",
-              marginBottom: "35px",
-            }}
-          >
-            Ability level
-          </Typography>
-          <RadioGroup
-            row
-            aria-label="position"
-            onChange={(e) => {
-              setValue("languageLevel", String(e.target.value));
-            }}
-          >
-            {levelList.map((i) => (
-              <div className="level">
-                <FormControlLabel
-                  onClick={handleClick}
-                  key={i.id}
-                  value={i.level}
-                  control={<Radio className="radio" />}
-                  label={i.level}
-                  labelPlacement="end"
-                />
-              </div>
-            ))}
-          </RadioGroup>
+            >
+              {levelList.map((i) => (
 
+                <div className="level">
+                  <FormControlLabel
+                    onClick={handleClick}
+                    key={i.id}
+                    value={i.level}
+                    control={<Radio className="radio" />}
+                    label={i.level}
+                    labelPlacement="end"
+                  /></div>
+              ))}
+
+            </RadioGroup>
+          </Grid>
           <br />
-          <Typography
-            variant="p"
-            style={{
-              width: "200px",
-              marginLeft: "0",
-              marginTop: "10px",
-              marginBottom: "35px",
-            }}
-          >
-            Have you done any courses or got any certificates? (Optional)
-          </Typography>
-          <Box style={{ width: "60%", marginTop: "10px" }}>
-            <Input
-              name="courseOrCertification"
-              control={control}
-              label={"Course or certification"}
-              variant={"outlined"}
-              color={"primary"}
-              helperText={"Course or certification"}
-              errors={errors}
-              rules={{
-                required: {
-                  value: true,
-                  message: "required",
-                },
-                minLength: {
-                  value: 5,
-                  message: "Input more then 5 letters",
-                },
-              }}
-            />
-          </Box>
+          <div className={isMediumScreen ? "smallTitleSmall" : "smallTitle"}>
+            <Typography variant="p">
+              Have you done any courses or got any certificates? (Optional)
+            </Typography>
+          </div>
+          <Grid container  >
+            <Grid item lg={8} xs={8}>
+              <Input
+                name="courseOrCertification"
+                control={control}
+                label={"Course or certification"}
+                variant={"outlined"}
+                color={"primary"}
+                helperText={"Course or certification"}
+                errors={errors}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "required",
+                  },
+                  minLength: {
+                    value: 5,
+                    message: "Input more then 5 letters",
+                  },
+                }}
+              />
+            </Grid>
+          </Grid>
+
 
           <InputSubmit />
         </form>
       </FormProvider>
-    </div>
+    </Grid>
+    <Grid item lg={4} xs={4}>
+      <Sidebar />
+    </Grid>
+  </Grid>
   );
 };
 

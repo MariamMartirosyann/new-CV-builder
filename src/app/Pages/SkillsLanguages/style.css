@@ -39,6 +39,7 @@
 .showPrewritten {
   text-align: end;
   color: rgb(103, 103, 241);
+  margin-bottom: 10px;
 }
 .skillsInput {
   width: 67%;

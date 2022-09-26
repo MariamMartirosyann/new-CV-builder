@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 import { useQuill } from "react-quilljs";
-import { Typography, Box, Grid} from "@mui/material";
+import { useMediaQuery } from "react-responsive";
+import { Typography, Box, Grid } from "@mui/material";
 import { submitObjectiveInfo } from "../../Redux/SubmitObjectiveInfoSlice";
 import { preWrittenTextState } from "../../Redux/PreWrittenSlice";
 import { ReactComponent as Add } from "../../../icons/add.svg";
 import PreWrittenObjective from "../PreWrittenObjective";
 import Sidebar from "../../Shared/Sidebar/Sidebar";
-import { nanoid } from "@reduxjs/toolkit";
 import "react-quill/dist/quill.snow.css";
 import "./style.css";
 
@@ -23,6 +24,7 @@ const Objective = () => {
   const El = lastElement?.objective;
   const ElIndex = lastElement?.index;
 
+  const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
 
   const [objective, setObjective] = useState("");
 
@@ -43,7 +45,6 @@ const Objective = () => {
     ],
   };
   const handleSubmit = (event) => {
-    console.log("11111111");
     event.preventDefault();
     dispatch(submitObjectiveInfo({ id: nanoid(), objective: objective }));
     navigate("/templates");
@@ -73,67 +74,67 @@ const Objective = () => {
   }, [ElIndex]);*/
 
   return (
-    <div className="main">
-      {preWrittenState ? <PreWrittenObjective /> : <Sidebar />}
+    <Grid
+      container
+      className={isMediumScreen ? "contactInfoSmall" : "contactInfo"}
+    >
+      <Grid item lg={8} xs={8}>
 
-      <Typography
-        variant="h4"
-        style={{ marginLeft: "0", marginTop: "30px", marginBottom: "15px" }}
-      >
-        Great! Let's edit your work experience
-      </Typography>
-      <Box style={{ width: "40%" }}>
-        <Typography variant="p">
-          Start with your most recent position and work backwards. Just add the
-          most recent and relevant positions if you have lots of experience.
-        </Typography>
-      </Box>
-
-      <Typography
-        variant="h5"
-        style={{ marginLeft: "0", marginTop: "30px", marginBottom: "15px" }}
-      >
-        Objective
-      </Typography>
-      <form className="formStyle">
-        <div
-          style={{
-            width: 700,
-            height: 300,
-            background: "rgba(206, 241, 229, .2)",
-            position: "relative",
-            border: "none",
-          }}
-        >
-          <div ref={quillRef} />
-          <Typography
-            onClick={showPrewritten}
-            variant="h6"
-            className="addText"
-            style={{
-              margin: "10px",
-              marginLeft: "0",
-              color: "rgb(103, 103, 241)",
-            }}
-          >
-            <Add /> Add pre-written text
+        <div className="marginTB3015">
+          <Typography variant="h5" className="titleBig">
+            Great! Let's edit your work experience
           </Typography>
-          <Typography variant="p" className="subText">
-            e.g. Proactive, customer-orientated retail professional with over 4
-            years of experience in reputable shops. Received 3 ‘Passion Awards’
-            for delivering outstanding service and have consistently surpassed
-            my target KPIs for mystery shoppers.
+        </div>
+        <div className={isMediumScreen ? "smallTitleSmall" : "smallTitle"}>
+          <Typography variant="p">
+            Start with your most recent position and work backwards. Just add the
+            most recent and relevant positions if you have lots of experience.
           </Typography>
         </div>
 
-        <Box container className="btnDiv">
-          {" "}
-          <button className="finishBtn" onClick={handleSubmit}>
-            Finish
-          </button>
-        </Box>
-      </form>
-    </div>
+        <Typography
+          variant="h6"
+          className="marginTopBottom30"
+        >
+          Objective
+        </Typography>
+        <form className="formStyle">
+          <div
+            className="quillStyle"
+          >
+            <div ref={quillRef} />
+            <Typography
+              onClick={showPrewritten}
+              variant="h6"
+              className="addText"
+              style={{
+                margin: "10px",
+                marginLeft: "0",
+                color: "rgb(103, 103, 241)",
+              }}
+            >
+              <Add /> Add pre-written text
+            </Typography>
+            <Typography variant="p" className="subText">
+              e.g. Proactive, customer-orientated retail professional with over 4
+              years of experience in reputable shops. Received 3 ‘Passion Awards’
+              for delivering outstanding service and have consistently surpassed
+              my target KPIs for mystery shoppers.
+            </Typography>
+          </div>
+
+          <Box container className="btnDiv">
+            {" "}
+            <button className={isMediumScreen?'buttonSmall': 'button'} onClick={handleSubmit}>
+              Finish
+            </button>
+          </Box>
+        </form>
+      </Grid>
+      <Grid item lg={4} xs={4}>
+        {preWrittenState ? <PreWrittenObjective /> : <Sidebar />}
+      </Grid>
+    </Grid>
   );
 };
 
