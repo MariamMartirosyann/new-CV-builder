@@ -10,6 +10,7 @@ import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
 import RadarRoundedIcon from "@mui/icons-material/RadarRounded";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import "./style.css";
+import { SignalCellularNullRounded } from "@mui/icons-material";
 
 
 const sections = [
@@ -52,7 +53,7 @@ const sections = [
 ];
 
 const Sidebar = () => {
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 768px)" });
+ // const isSmallScreen = useMediaQuery({ query: "(max-width: 768px)" });
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
 
   const { pathName } = useLocation();
@@ -66,7 +67,7 @@ const Sidebar = () => {
     <>
       {!isMediumScreen ? (
         <div className="sideBar">
-          {showDownloadDivState ? (
+          {!showDownloadDivState ? (
             <>
               <Typography variant="h6" className="resume">
                 Here is your resume!
@@ -118,7 +119,8 @@ const Sidebar = () => {
               </div>
             </Link>
           ))}
-        </div>
+        </div> 
+        
       )}
     </>
   );

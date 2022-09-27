@@ -24,8 +24,8 @@ const TemplateOne = () => {
   const ref = React.createRef();
 
   return (
-    <Grid container >
-      <Grid item lg={8} xs={8}>
+    <Grid container  className="main">
+      <Grid item lg={9} xs={9}>
         <div className="downLoad">
           <Pdf targetRef={ref} filename="code-example.pdf">
             {({ toPdf }) => (
@@ -212,7 +212,7 @@ const TemplateOne = () => {
               ))}
             </Grid>
 
-            <Grid item lg={6} className="rightSide">
+            <Grid item lg={8} xs={8} className="rightSide">
               <div className="top">
                 <div style={{ height: "30%" }}>
                   {" "}
@@ -375,7 +375,7 @@ const TemplateOne = () => {
           </Grid>
         </div>
       </Grid>
-      <Grid item lg={4} xs={4}>
+      <Grid item lg={3} xs={3}>
         <Sidebar />
       </Grid>
     </Grid>

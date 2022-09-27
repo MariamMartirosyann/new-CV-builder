@@ -1,4 +1,10 @@
+.main{
+  margin:30px 30px;
+}
+
+
 .main1 {
+  width:80vw;
   height: 100vh;
   margin: 20px;
 }
@@ -15,8 +21,6 @@
 }
 .leftSide {
   padding: 50px 40px 30px 60px;
-}
-.rightSide {
 }
 .title {
   margin-top: 15px;
@@ -63,7 +67,7 @@
 }
 .downLoadBtn {
   position: absolute;
-  right: -24%;
+  right: -23%;
   top: 0%;
   width: 13%;
   height: 50px;

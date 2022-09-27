@@ -40,7 +40,7 @@ function App() {
           <Route path="templates" element={<Templates />} />
           <Route path="templateOne" element={<TemplateOne />} />
           <Route path="templateTwo" element={<TemplateTwo />} />
-          <Route path="shareRezume" element={<ShareRezume />} />
+          <Route path="shareResume" element={<ShareRezume />} />
         </Routes>
       </BrowserRouter>
       </LocalizationProvider>
