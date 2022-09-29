@@ -55,7 +55,7 @@ const Sidebar = () => {
  // const isSmallScreen = useMediaQuery({ query: "(max-width: 768px)" });
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
 
-  const { pathName } = useLocation();
+  const  pathName  = useLocation().pathname;
 
   const showDownloadDivState = useMemo(
     () => pathName === "/templateOne" || pathName === "/templateTwo",
@@ -66,7 +66,7 @@ const Sidebar = () => {
     <>
       {!isMediumScreen ? (
         <div className="sideBar">
-          {!showDownloadDivState ? (
+          {showDownloadDivState ? (
             <>
               <Typography variant="h6" className="resume">
                 Here is your resume!
