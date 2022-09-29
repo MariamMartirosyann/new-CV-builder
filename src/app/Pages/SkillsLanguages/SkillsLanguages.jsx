@@ -34,10 +34,10 @@ const SkillsLanguages = () => {
       skills: "",
     },
   });
-
+  console.log(preWrittenState,'1')
   const showPrewritten = () => {
-    dispatch(preWrittenTextState(true));
-    console.log("hiiiiiiiiiiiiiiiiiiiii")
+    dispatch(preWrittenTextState(11));
+    console.log(preWrittenState,"2")
   };
   const handleAdd = () => {
     navigate("/languages/add");
@@ -62,7 +62,7 @@ const SkillsLanguages = () => {
   const handleClick = (id) => {
     dispatch(deleteSkills({ id: id }));
   };
-
+ 
   return (
     <>
       {langList.length === 0 ? (
@@ -284,6 +284,7 @@ const SkillsLanguages = () => {
             </Link>
           </Grid>
           <Grid item lg={4} xs={4}>
+           
             {preWrittenState ? <PreWritten /> : <Sidebar />}
           </Grid>
         </Grid>

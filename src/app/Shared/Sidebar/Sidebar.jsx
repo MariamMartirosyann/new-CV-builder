@@ -10,7 +10,6 @@ import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
 import RadarRoundedIcon from "@mui/icons-material/RadarRounded";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import "./style.css";
-import { SignalCellularNullRounded } from "@mui/icons-material";
 
 
 const sections = [

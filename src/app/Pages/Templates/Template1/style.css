@@ -18,10 +18,12 @@
   justify-content: center;
   background: rgb(38, 160, 244);
   color: white;
-}
-.leftSide {
   padding: 50px 40px 30px 60px;
 }
+.leftSide .css-2ulfj5-MuiTypography-root{
+  color:white;
+}
+
 .title {
   margin-top: 15px;
   margin-bottom: 15px;

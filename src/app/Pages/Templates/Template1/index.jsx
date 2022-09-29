@@ -16,7 +16,7 @@ const TemplateOne = () => {
   );
   const experience = useSelector((state) => state.jobsInfo.list);
   const education = useSelector((state) => state.educationInfo.list);
-  const description = experience?.description;
+ // const description = experience?.description;
   console.log("experience", experience);
   const obj = objective?.objective;
 

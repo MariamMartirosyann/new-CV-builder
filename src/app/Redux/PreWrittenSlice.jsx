@@ -85,10 +85,10 @@ const preWrittenSlice = createSlice({
   name: "preWrittenInfo",
   initialState,
   reducers: {
-    preWrittenTextState: (state, { payload }) => {
+    preWrittenTextState: (state,  payload ) => {
       state.showPreWrittenText = payload;
     },
-    preWrittenTextState: (state, { payload }) => {
+    showDownloadDiv: (state, { payload }) => {
       state.showDownloadDiv = payload;
     },
   },
