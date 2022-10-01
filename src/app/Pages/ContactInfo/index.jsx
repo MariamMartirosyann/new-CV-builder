@@ -13,6 +13,7 @@ import Sidebar from "../../Shared/Sidebar/Sidebar";
 import InputSubmit from "../../Shared/InputSubmit";
 import "./style.css";
 import "../../../App.css";
+import Detection from "./Compoents/ObjectDetect";
 const maxNumber = 69;
 
 const ContactInfo = () => {
@@ -120,6 +121,7 @@ const ContactInfo = () => {
                 <Grid item lg={3} xs={8}>
                   <Grid container className={isMediumScreen ? "margin015Small" : "margin015"}>
                     <Grid item>
+                      <Detection/>
                       <div className="App">
                         <ImageUploading
                           multiple
