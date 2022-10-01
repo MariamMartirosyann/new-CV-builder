@@ -53,7 +53,7 @@ function DetectionImage() {
       const ctx = canvasRef.current.getContext("2d");
 
       // 5. TODO - Update drawing utility
-      // drawSomething(obj, ctx)  
+      // drawSomething(obj, ctx)  llllll
       drawRect(obj, ctx)
 
      
