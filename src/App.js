@@ -18,6 +18,8 @@ import EducationItemEdit from "./app/Pages/EducationItemEdit";
 import TemplateOne from "./app/Pages/Templates/Template1";
 import TemplateTwo from "./app/Pages/Templates/TemplateTwo/TemplateTwo";
 import ShareRezume from "./app/Pages/ShareRezume";
+import WebCam from "./app/Pages/ContactInfo/Compoents/FaceDetectionWebCam/WebCam";
+import DetectionImage from "./app/Pages/ContactInfo/Compoents/FaceDetectionImage/ObjectDetect";
 
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
           <Route path="templateOne" element={<TemplateOne />} />
           <Route path="templateTwo" element={<TemplateTwo />} />
           <Route path="shareResume" element={<ShareRezume />} />
+          <Route path="face-detection" element={<WebCam />} />
+          <Route path="face-detection-photo" element={<DetectionImage/>} />
         </Routes>
       </BrowserRouter>
       </LocalizationProvider>
