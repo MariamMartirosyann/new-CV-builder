@@ -1,4 +1,9 @@
+.upload__image-wrapper{
+width: 100%;
 
+display: flex;
+justify-content: center;
+}
 .photoBtn{
     margin: 30px;
 }

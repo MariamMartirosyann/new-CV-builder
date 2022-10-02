@@ -4,7 +4,6 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
-import ImageUploading from "react-images-uploading";
 import { addContactInfo } from "../../Redux/ContactInfoSlice";
 import { addImage } from "../../Redux/ImageSlice";
 import { Box, Typography, Grid } from "@mui/material";
@@ -13,16 +12,19 @@ import Sidebar from "../../Shared/Sidebar/Sidebar";
 import InputSubmit from "../../Shared/InputSubmit";
 import "./style.css";
 import "../../../App.css";
-const maxNumber = 69;
+
 
 const ContactInfo = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [images, setImages] = useState([]);
 
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
 
   const handleTakeAPicture = ()=>{
+    navigate("/face-detection")
+  }
+
+  const handleAddAPicture = ()=>{
     navigate("/face-detection-photo")
   }
 
@@ -47,10 +49,6 @@ const ContactInfo = () => {
     control,
   } = methods;
 
-  const onChange = (imageList, addUpdateIndex) => {
-    setImages(imageList);
-    dispatch(addImage(imageList));
-  };
 
   const onSubmit = (formData) => {
     dispatch(addContactInfo(formData));
@@ -124,77 +122,24 @@ const ContactInfo = () => {
                 <Grid item lg={3} xs={8}>
                   <Grid container className={isMediumScreen ? "margin015Small" : "margin015"}>
                     <Grid item>
-                      
-                      <div className="App">
-                        <ImageUploading
-                          multiple
-                          value={images}
-                          onChange={onChange}
-                          maxNumber={1}
-                          dataURLKey="data_url"
-                        >
-                          {({
-                            imageList,
-                            onImageUpload,
-                            onImageRemoveAll,
-                            onImageUpdate,
-                            onImageRemove,
-                            isDragging,
-                            dragProps,
-                          }) => (
-                            <div className="upload__image-wrapper">
-                              <button
+                    <button
                               className={isMediumScreen ? "imageBtnSmall":"imageBtn"}
-                                style={
-                                  isDragging ? { color: "red" } : undefined
-                                }
-                                onClick={onImageUpload}
-                                {...dragProps}
+                               
+                                onClick={handleAddAPicture}
+                                
                               >
-                                Add Profile Photo
+                                Addd a  Profile Photo
                               </button>
                               <button
                               className={isMediumScreen ? "imageBtnSmall":"imageBtn"}
-                                style={
-                                  isDragging ? { color: "red" } : undefined
-                                }
+                                F
                                 onClick={handleTakeAPicture}
                                 
                               >
                                 Take a  Profile Photo
                               </button>
-                              &nbsp;
-                              {imageList.map((image, index) => (
-                                <div key={index} className="image-item">
-                                  <Grid container spacing={3}>
-                                    <Grid item>
-                                      <img
-                                        src={image["data_url"]}
-                                        alt=""
-                                        width="100"
-                                      />
-                                    </Grid>
-                                    <Grid item>
-                                      <div className="image-item__btn-wrapper">
-                                        <button
-                                          onClick={() => onImageUpdate(index)}
-                                        >
-                                          Update
-                                        </button>
-                                        <br />
-                                        <button
-                                          onClick={() => onImageRemove(index)}
-                                        >
-                                          Delete
-                                        </button>
-                                      </div>
-                                    </Grid>
-                                  </Grid>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </ImageUploading>
+                      <div className="App">
+                       
                       </div>
                     </Grid>
                     <Grid item></Grid>

@@ -1,6 +1,6 @@
 
 
-export const drawRect = (detections, ctx,text) => {
+export const drawRect = (detections, ctx) => {
     
         detections.forEach(prediction=>{
             const [x,y, width,height]=prediction["bbox"];
@@ -16,6 +16,7 @@ export const drawRect = (detections, ctx,text) => {
             ctx.beginPath();
             ctx.fillText(text, x,y);
             ctx.rect(x,y, width, height);
+            ctx.strokeStyle=color;
             ctx.stroke()
             
             if(text==="person"){

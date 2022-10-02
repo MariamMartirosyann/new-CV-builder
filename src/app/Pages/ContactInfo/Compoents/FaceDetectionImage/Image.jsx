@@ -3,7 +3,7 @@ import DetectionImage from './ObjectDetect'
 
 const Image = () => {
   return (
-    <div style={{margin:"50px", background:"pink"}}><DetectionImage/></div>
+    <div style={{margin:"150px"}}><DetectionImage/></div>
   )
 }
 
