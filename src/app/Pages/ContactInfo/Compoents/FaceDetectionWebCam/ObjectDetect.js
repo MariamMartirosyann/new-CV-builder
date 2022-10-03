@@ -29,7 +29,7 @@ function Detection() {
   const takeImg = React.useCallback(() => {
     const imgSrc = webcamRef.current.getScreenshot();
     setImg(imgSrc);
-  });
+  }, [webcamRef, setImg]);
 
   // Main function
   const runCoco = async () => {
