@@ -20,7 +20,7 @@ const TemplateOne = () => {
   console.log("experience", experience);
   const obj = objective?.objective;
 
-  const image = img?.[0]?.data_url;
+  const image = img?.[img.length-1]?.data_url;
   const ref = React.createRef();
 
   return (

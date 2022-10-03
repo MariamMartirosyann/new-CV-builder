@@ -9,7 +9,8 @@ import Webcam from "react-webcam";
 import "./style.css";
 // 2. TODO - Import drawing utility here
 import { drawRect } from "./utilities";
-import { Navigate } from "react-router";
+import { addImage } from "../../../../Redux/ImageSlice";
+import { useDispatch } from "react-redux";
 
 
 const option = {
@@ -21,6 +22,7 @@ const option = {
 function Detection() {
 
   const navigate = useNavigate();
+  const dispatch=useDispatch();
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -29,6 +31,7 @@ function Detection() {
   const takeImg = React.useCallback(() => {
     const imgSrc = webcamRef.current.getScreenshot();
     setImg(imgSrc);
+    dispatch(addImage(imgSrc));
   }, [webcamRef, setImg]);
 
   // Main function
@@ -210,6 +213,7 @@ function Detection() {
               </button> */}
         <div>
          {img != "" ? (
+          <>
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -219,7 +223,13 @@ function Detection() {
             >
               Retake
             </button>
-            
+              <button
+              onClick={()=>navigate("/")}
+              className="btn btn-primary"
+            >
+              Save Photo
+            </button>
+            </>
            
           ) : (
             <button
@@ -232,6 +242,7 @@ function Detection() {
               Click image
             </button>
           )} 
+        
         </div>
       </div>4
 
