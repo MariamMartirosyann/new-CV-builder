@@ -1,4 +1,29 @@
+.upload__image{
+text-align: center;
+}
 .imageBtn{
     width: 50%;
     margin:10px auto
+}
+.imageBtns{
+    width: 50%;
+    margin:10px auto;
+    display: flex;
+    flex-direction: row;
+}
+.uploadBtn{
+    width: 50%;
+    margin-right:10px;
+}
+.deleteBtn{
+    width: 50%;
+    margin-left:10px;
+}
+.saveImage{
+display: flex;
+justify-content: center;
+margin-top: 35%;
+}
+.saveImageBtn{
+    width: 50%;
 }

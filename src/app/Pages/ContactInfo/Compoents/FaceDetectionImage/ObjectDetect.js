@@ -1,9 +1,8 @@
 // Import dependencies
 import React, { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import One from "../../../../../images/1.png"
 import { addImage } from "../../../../Redux/ImageSlice";
-import { Grid } from "@mui/material";
 import { useMediaQuery } from "react-responsive";
 import ImageUploading from "react-images-uploading"
 // 1. TODO - Import required model here
@@ -13,13 +12,15 @@ import * as cocossd from "@tensorflow-models/coco-ssd";
 import "./style.css";
 // 2. TODO - Import drawing utility here
 import { drawRect } from "./utilities";
+import { Save } from "@mui/icons-material";
 const maxNumber = 1;
 
 function DetectionImage() {
   const imgRef = useRef(null);
   const canvasRef = useRef(null);
-  const dispatch = useDispatch();
   const [images, setImages] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
   // Main function
@@ -71,124 +72,132 @@ function DetectionImage() {
     setImages(imageList);
     dispatch(addImage(imageList));
   };
+
+  const savePhoto = () => {
+    navigate("/")
+  }
+
+  const handleImageUpdate =(index)=>{
+
+  }
   useEffect(() => { runCoco() }, []);
 
   return (
     <div >
-      <header>
-        <Grid item>
 
-          <div className="App">
-            <ImageUploading
-              multiple
-              value={images}
-              onChange={onChange}
-              maxNumber={1}
-              dataURLKey="data_url"
-            >
-              {({
-                imageList,
-                onImageUpload,
-                onImageRemoveAll,
-                onImageUpdate,
-                onImageRemove,
-                isDragging,
-                dragProps,
-              }) => (
-                <div className="upload__image-wrapper">
-                  <button
-                    className={isMediumScreen ? "imageBtnSmall" : "imageBtn"}
-                    style={
-                      isDragging ? { color: "red" } : undefined
-                    }
-                    onClick={onImageUpload}
-                    {...dragProps}
-                  >
-                    Add Profile Photo
-                  </button>
 
-                  &nbsp;
-                  {imageList.map((image, index) => (
-                    <div key={index} className="image-item">
-                      <Grid container spacing={3}>
-                        <Grid item>
-                          <img
-                            src={image["data_url"]}
-                            alt=""
-                            ref={imgRef}
-                            style={{
-                              position: "absolute",
-                              marginLeft: "auto",
-                              marginRight: "auto",
-                              top:100,
-                              left: 0,
-                              right: 0,
-                              textAlign: "center",
-                              zindex: 9,
-                              width: 640,
-                              height: 480,
-                            }}
-                          />
-                          <canvas
-                            ref={canvasRef}
-                            style={{
-                              position: "absolute",
-                              marginLeft: "auto",
-                              marginRight: "auto",
-                              top:100,
-                              left: 0,
-                              right: 0,
-                              textAlign: "center",
-                              zindex: 8,
-                              width: 640,
-                              height: 480,
-                            }}
-                          />
-                        </Grid>
-                        <Grid item>
-                          <div className="image-item__btn-wrapper">
-                            <button
-                              onClick={() => onImageUpdate(index)}
-                            >
-                              Update
-                            </button>
-                            <br />
-                            <button
-                              onClick={() => onImageRemove(index)}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </div>
-                  ))}
+      <div className="App">
+        <ImageUploading
+          multiple
+          value={images}
+          onChange={onChange}
+          maxNumber={1}
+          dataURLKey="data_url"
+        >
+          {({
+            imageList,
+            onImageUpload,
+            onImageRemoveAll,
+            onImageUpdate,
+            onImageRemove,
+            isDragging,
+            dragProps,
+          }) => (
+            <div className="upload__image">
+              <button
+                className={isMediumScreen ? "imageBtnSmall" : "imageBtn"}
+                style={
+                  isDragging ? { color: "red" } : undefined
+                }
+                onClick={onImageUpload}
+                {...dragProps}
+              >
+                Add Profile Photo
+              </button>
+
+              &nbsp;
+              {imageList.map((image, index) => (
+                <div key={index} >
+
+
+                  <img
+                    src={image["data_url"]}
+                    alt=""
+                    ref={imgRef}
+                    style={{
+                      position: "absolute",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      top: 100,
+                      left: 0,
+                      right: 0,
+                      textAlign: "center",
+                      zindex: 9,
+                      width: 640,
+                      height: 480,
+                    }}
+                  />
+                  <canvas
+                    ref={canvasRef}
+                    style={{
+                      position: "absolute",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      top: 100,
+                      left: 0,
+                      right: 0,
+                      textAlign: "center",
+                      zindex: 8,
+                      width: 640,
+                      height: 480,
+                    }}
+                  />
+
+                  <div className={"imageBtns"}>
+
+                    <button
+                      className="uploadBtn"
+                      onClick={() => onImageUpdate(index)}
+                    >
+                      Update
+                    </button>
+                    <br />
+                    <button
+                      className="deleteBtn"
+                      onClick={() => onImageRemove(index)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+
+
+
                 </div>
-              )}
-            </ImageUploading>
-          </div>
-        </Grid>
-        {/* <img
-         src={One}
-          ref={imgRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
-        /> */}
 
+              ))}
+            </div>
+          )}
+        </ImageUploading>
 
-      </header>
-    </div>
-  );
+      </div>
+      <div className="saveImage">
+        <button
+          className="saveImageBtn"
+          onClick={savePhoto}
+        >
+          Face is deteced.Save photo
+        </button>
+        
+          {/* <h6
+            className="saveImageBtn"
+          >
+            Face is not deteced.Upload another photo.
+          </h6>
+         */}
+        </div>
+      </div>
+      );
 }
 
 
-export default DetectionImage;
+      export default DetectionImage;

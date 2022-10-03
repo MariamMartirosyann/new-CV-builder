@@ -20,7 +20,12 @@ export const drawRect = (detections, ctx) => {
             ctx.stroke()
             
             if(text==="person"){
-                console.log("Your face is awesome!!!")
+                <button
+                className={"imageBtn"}
+              
+              >
+                Add Profile Photo
+              </button>
             }
         })
 
