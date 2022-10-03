@@ -4,15 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addImage } from "../../../../Redux/ImageSlice";
 import { useMediaQuery } from "react-responsive";
-import ImageUploading from "react-images-uploading"
+import ImageUploading from "react-images-uploading";
 // 1. TODO - Import required model here
-// e.g. import * as tfmodel from "@tensorflow-models/tfmodel";
 import * as cocossd from "@tensorflow-models/coco-ssd";
-//import Webcam from "react-webcam";
 import "./style.css";
 // 2. TODO - Import drawing utility here
 import { drawRect } from "./utilities";
-import { Save } from "@mui/icons-material";
+
 const maxNumber = 1;
 
 function DetectionImage() {
@@ -25,28 +23,23 @@ function DetectionImage() {
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
   // Main function
   const runCoco = async () => {
-    // 3. TODO - Load network 
-    // e.g. const net = await cocossd.load();
+    // 3. TODO - Load network
     const net = await cocossd.load();
     //  Loop and detect hands
     setInterval(() => {
       detect(net);
     }, 10);
   };
-
-  const detect = async (net) => {
+ 
+  const detect = async (net,text) => {
     // Check data is available
-    if (
-      typeof imgRef.current !== "undefined" &&
-      imgRef.current !== null
-      // imgRef.current.photo.readyState === 4
-    ) {
-      // Get Video Properties
+    if (typeof imgRef.current !== "undefined" && imgRef.current !== null) {
+      // Get Photo Properties
       const photo = imgRef.current;
       const photoWidth = imgRef.current.width;
       const photoHeight = imgRef.current.height;
 
-      // Set video width
+      // Set photo width
       /*photo.current.photo.width = photoWidth;
       photo.current.photo.height = photoHeight;*/
 
@@ -56,36 +49,38 @@ function DetectionImage() {
 
       // 4. TODO - Make Detections
       const obj = await net.detect(photo);
-      console.log(obj)
+      
+      console.log(obj);
 
       // Draw mesh
       const ctx = canvasRef.current.getContext("2d");
 
       // 5. TODO - Update drawing utility
-      // drawSomething(obj, ctx)  llllll
-      drawRect(obj, ctx)
-
-
+      drawRect(obj, ctx);
+       text=obj[0].class
+      console.log("text",text)
     }
+   return text
   };
+
+
+  const [isFaceDetect, setIsFaceDetect] = useState(false);
+
   const onChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
     dispatch(addImage(imageList));
   };
 
   const savePhoto = () => {
-    navigate("/")
-  }
+    navigate("/");
+  };
 
-  const handleImageUpdate =(index)=>{
-
-  }
-  useEffect(() => { runCoco() }, []);
+  useEffect(() => {
+    runCoco();
+  }, []);
 
   return (
-    <div >
-
-
+    <div>
       <div className="App">
         <ImageUploading
           multiple
@@ -105,21 +100,16 @@ function DetectionImage() {
           }) => (
             <div className="upload__image">
               <button
-                className={isMediumScreen ? "imageBtnSmall" : "imageBtn"}
-                style={
-                  isDragging ? { color: "red" } : undefined
-                }
+                className={"imageBtn"}
+                style={isDragging ? { color: "red" } : undefined}
                 onClick={onImageUpload}
                 {...dragProps}
               >
                 Add Profile Photo
               </button>
-
               &nbsp;
               {imageList.map((image, index) => (
-                <div key={index} >
-
-
+                <div key={index}>
                   <img
                     src={image["data_url"]}
                     alt=""
@@ -154,7 +144,6 @@ function DetectionImage() {
                   />
 
                   <div className={"imageBtns"}>
-
                     <button
                       className="uploadBtn"
                       onClick={() => onImageUpdate(index)}
@@ -169,35 +158,29 @@ function DetectionImage() {
                       Delete
                     </button>
                   </div>
+                  {isFaceDetect ? (
+                    <div className="saveImage">
+                      <h6 className="saveImageBtn">
+                        Face is not deteced.Upload another photo.
+                      </h6>
+                    </div>
+                  ) : (
+                    <div className="saveImage">
+                      <button className="saveImageBtn" onClick={savePhoto}>
+                        Face is detected.Save photo
+                      </button>
 
-
-
+                     
+                    </div>
+                  )}
                 </div>
-
               ))}
             </div>
           )}
         </ImageUploading>
-
       </div>
-      <div className="saveImage">
-        <button
-          className="saveImageBtn"
-          onClick={savePhoto}
-        >
-          Face is deteced.Save photo
-        </button>
-        
-          {/* <h6
-            className="saveImageBtn"
-          >
-            Face is not deteced.Upload another photo.
-          </h6>
-         */}
-        </div>
-      </div>
-      );
+    </div>
+  );
 }
 
-
-      export default DetectionImage;
+export default DetectionImage;

@@ -12,7 +12,7 @@ import "./style.css";
 function Detection() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-
+  const photoRef = useRef(null)
   // Main function
   const runCoco = async () => {
     // 3. TODO - Load network 
@@ -59,6 +59,23 @@ function Detection() {
 
   useEffect(()=>{runCoco()},[]);
 
+  const takePicture = () => {
+    const width = 400
+    const height = width / (16 / 9)
+    
+   // let video = videoRef.current
+ 
+    const photo = photoRef.current
+ 
+    photo.width = width
+ 
+    photo.height = height
+ 
+    let ctx = photo.getContext('2d')
+ 
+    ctx.drawImage(video, 0, 0, width, height)
+    
+  }
   return (
     <div >
       <header>
