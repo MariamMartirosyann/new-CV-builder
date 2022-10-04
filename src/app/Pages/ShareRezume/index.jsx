@@ -1,5 +1,5 @@
 import React from 'react';
-import TemplateOne from '../Templates/Template1';
+
 import { Grid, Typography } from '@mui/material';
 import {
   EmailShareButton,
@@ -10,13 +10,10 @@ import {
   InstapaperIcon,
   LinkedinShareButton,
   LinkedinIcon,
-  MailruShareButton,
-  PinterestShareButton,
   TelegramShareButton,
   TelegramIcon,
   ViberShareButton,
   ViberIcon,
-  VKShareButton,
   WhatsappShareButton,
   WhatsappIcon
 } from "react-share";

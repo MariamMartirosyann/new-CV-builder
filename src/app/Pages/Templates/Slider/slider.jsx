@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
-import TemplateOne from "../Template1";
 import One from "../../../../images/1.png";
 import Two from "../../../../images/10.png";
 import Three from "../../../../images/3.png";

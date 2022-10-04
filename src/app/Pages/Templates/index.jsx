@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Grid} from "@mui/material";
+import { Typography} from "@mui/material";
 import "./style.css";
 import SimpleSlider from "./Slider/slider";
 

@@ -1,49 +1,71 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-} from "react";
+// Import dependencies
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addImage } from "../../../../Redux/ImageSlice";
+import { useMediaQuery } from "react-responsive";
 import ImageUploading from "react-images-uploading";
+import * as tf from "@tensorflow/tfjs";
+// 1. TODO - Import required model here
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import "./style.css";
+// 2. TODO - Import drawing utility here
 import { drawRect } from "./utilities";
+
+
+const maxNumber = 1;
 
 function DetectionImage() {
   const imgRef = useRef(null);
-  const [tfReturnedText, setTFReturnedText] = useState(false);
   const canvasRef = useRef(null);
   const [images, setImages] = useState([]);
+  const [isTrue, setIsTrue]=useState();
+  const [isFaceDetect, setIsFaceDetect] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const runCoco = useCallback(async () => {
+  const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
+  // Main function
+  const runCoco = async () => {
+    // 3. TODO - Load network
     const net = await cocossd.load();
-    detect(net);
-  }, []);
-
+    //  Loop and detect hands
+      detect(net);
+  }
+ 
   const detect = async (net) => {
+    debugger;
+    // Check data is available
     if (typeof imgRef.current !== "undefined" && imgRef.current !== null) {
+      // Get Photo Properties
       const photo = imgRef.current;
       const photoWidth = imgRef.current.width;
       const photoHeight = imgRef.current.height;
 
+      // // Set photo width
+      // photo.current.width = photoWidth;
+      // photo.current.height = photoHeight;
+
+      // Set canvas height and width
       canvasRef.current.width = photoWidth;
       canvasRef.current.height = photoHeight;
 
+      // 4. TODO - Make Detections
       const obj = await net.detect(photo);
+      console.log(obj);
 
+      // Draw mesh
       const ctx = canvasRef.current.getContext("2d");
+      // 5. TODO - Update drawing utility
       drawRect(obj, ctx);
-      setTFReturnedText(obj[0].class);
+      setIsTrue(obj[0].class)
+      // console.log("text",text)
     }
+  
   };
+console.log(isTrue,"isTrue")
 
-  console.log(tfReturnedText);
+  
 
   const onChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
@@ -56,11 +78,7 @@ function DetectionImage() {
 
   useEffect(() => {
     runCoco();
-  }, [runCoco, images]);
-
-  const isFaceDetect = useMemo(() => {
-    return tfReturnedText === "person";
-  }, [tfReturnedText]);
+  }, []);
 
   return (
     <div>
@@ -75,6 +93,7 @@ function DetectionImage() {
           {({
             imageList,
             onImageUpload,
+            onImageRemoveAll,
             onImageUpdate,
             onImageRemove,
             isDragging,
@@ -151,6 +170,8 @@ function DetectionImage() {
                       <button className="saveImageBtn" onClick={savePhoto}>
                         Face is detected.Save photo
                       </button>
+
+                     
                     </div>
                   )}
                 </div>

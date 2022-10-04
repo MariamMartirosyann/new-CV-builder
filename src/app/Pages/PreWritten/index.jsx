@@ -17,13 +17,7 @@ const PreWritten = () => {
   const dispatch = useDispatch();
   const list = useSelector((state) => state.preWrittenInfo.list);
   const listNew = useSelector((state) => state.skillsInfo.list);
-  const state = useSelector(
-    (state) => state.preWrittenInfo.showPreWrittenText
-  );
 
- 
-  console.log("listt", list);
-  console.log("Newlistt", listNew);
 
   const handleAdd = (item) => {
     const newFormData = {

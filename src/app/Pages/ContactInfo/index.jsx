@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "../../Shared/Input";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import { addContactInfo } from "../../Redux/ContactInfoSlice";
-import { addImage } from "../../Redux/ImageSlice";
 import { Box, Typography, Grid } from "@mui/material";
 import DatePicker from "../../Shared/DatePicker";
 import Sidebar from "../../Shared/Sidebar/Sidebar";

@@ -1,6 +1,7 @@
 export const drawRect = (detections, ctx) => {
     
   detections.forEach(prediction=>{
+
       const [x,y, width,height]=prediction["bbox"];
       const text=prediction['class']
 
@@ -17,8 +18,7 @@ export const drawRect = (detections, ctx) => {
       ctx.stroke()
 
 
-      if(text==="person"){
-          console.log("Your face is awesome!!!")}
+     
   })
 
 

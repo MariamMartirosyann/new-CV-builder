@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm, FormProvider  } from "react-hook-form";
 import { useMediaQuery } from "react-responsive";
 import { Typography, Grid, Box } from "@mui/material";
@@ -17,7 +17,7 @@ const Jobs = () => {
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams();
+  
 
   const methods = useForm({
     defaultValues: {

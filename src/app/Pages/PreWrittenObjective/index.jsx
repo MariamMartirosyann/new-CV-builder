@@ -15,13 +15,10 @@ import "./style.css";
 
 const PreWrittenObjective = () => {
   const [value, setValue] = useState("");
-  console.log(value);
   const dispatch = useDispatch();
   const list = useSelector((state) => state.preWrittenInfo.list1);
   const listNew = useSelector((state) => state.objectiveInfo.list);
-  const state = useSelector((state) => state.preWrittenInfo.showPreWrittenText);
-  console.log("list", list);
-  console.log("listNew", listNew);
+ 
 
   const handleAdd = (item) => {
     const newFormData = {

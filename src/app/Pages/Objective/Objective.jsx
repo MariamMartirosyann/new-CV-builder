@@ -22,7 +22,7 @@ const Objective = () => {
   const preWrittenText = useSelector((state) => state.objectiveInfo.list);
   const lastElement = preWrittenText[preWrittenText.length - 1];
   const El = lastElement?.objective;
-  const ElIndex = lastElement?.index;
+
 
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
 
