@@ -193,39 +193,21 @@ function Detection() {
             <img src={img} />
           )}
         </div>
-        {/* <button
-              onClick={(e) => {
-                e.preventDefault();
-                takeImg();
-              }}
-              className="btn btn-dark"
-            >
-              Retake
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                takeImg();
-              }}
-              className="btn btn-primary"
-            >
-              Click image
-              </button> */}
         <div>
-         {img != "" ? (
+         {img !== "" ? (
           <>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 takeImg();
               }}
-              className="btn btn-dark"
+             
             >
               Retake
             </button>
               <button
               onClick={()=>navigate("/")}
-              className="btn btn-primary"
+             
             >
               Save Photo
             </button>
@@ -237,14 +219,13 @@ function Detection() {
                 e.preventDefault();
                 takeImg();
               }}
-              className="btn btn-primary"
             >
               Click image
             </button>
           )} 
         
         </div>
-      </div>4
+      </div>
 
     </div>
   );

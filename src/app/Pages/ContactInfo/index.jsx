@@ -13,20 +13,19 @@ import InputSubmit from "../../Shared/InputSubmit";
 import "./style.css";
 import "../../../App.css";
 
-
 const ContactInfo = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const isMediumScreen = useMediaQuery({ query: "(max-width: 1100px)" });
 
-  const handleTakeAPicture = ()=>{
-    navigate("/face-detection")
-  }
+  const handleTakeAPicture = () => {
+    navigate("/face-detection");
+  };
 
-  const handleAddAPicture = ()=>{
-    navigate("/face-detection-photo")
-  }
+  const handleAddAPicture = () => {
+    navigate("/face-detection-photo");
+  };
 
   const methods = useForm({
     defaultValues: {
@@ -48,7 +47,6 @@ const ContactInfo = () => {
     handleSubmit,
     control,
   } = methods;
-
 
   const onSubmit = (formData) => {
     dispatch(addContactInfo(formData));
@@ -76,7 +74,7 @@ const ContactInfo = () => {
           </div>
 
           <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)} >
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={1}>
                 <Grid item lg={3} xs={8}>
                   <Input
@@ -120,29 +118,26 @@ const ContactInfo = () => {
                   />
                 </Grid>
                 <Grid item lg={3} xs={8}>
-                  <Grid container className={isMediumScreen ? "margin015Small" : "margin015"}>
-                    <Grid item>
-                    <button
-                              className={isMediumScreen ? "imageBtnSmall":"imageBtn"}
-                               
-                                onClick={handleAddAPicture}
-                                
-                              >
-                                Addd a  Profile Photo
-                              </button>
-                              <button
-                              className={isMediumScreen ? "imageBtnSmall":"imageBtn"}
-                                F
-                                onClick={handleTakeAPicture}
-                                
-                              >
-                                Take a  Profile Photo
-                              </button>
-                      <div className="App">
-                       
-                      </div>
+                  <Grid
+                    container
+                    className={isMediumScreen ? "margin015Small" : "margin015"}
+                  >
+                    <Grid item lg={7} xs={8}>
+                      <button
+                        className={"imageBtn"}
+                        onClick={handleAddAPicture}
+                      >
+                        Add Profile Photo
+                      </button>
                     </Grid>
-                    <Grid item></Grid>
+                    <Grid item lg={7} xs={8}>
+                      <button
+                        className={"imageBtn"}
+                        onClick={handleTakeAPicture}
+                      >
+                        Take Profile Photo
+                      </button>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>

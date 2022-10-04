@@ -5,11 +5,13 @@ import { useDispatch } from "react-redux";
 import { addImage } from "../../../../Redux/ImageSlice";
 import { useMediaQuery } from "react-responsive";
 import ImageUploading from "react-images-uploading";
+import * as tf from "@tensorflow/tfjs";
 // 1. TODO - Import required model here
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import "./style.css";
 // 2. TODO - Import drawing utility here
 import { drawRect } from "./utilities";
+
 
 const maxNumber = 1;
 
@@ -17,6 +19,7 @@ function DetectionImage() {
   const imgRef = useRef(null);
   const canvasRef = useRef(null);
   const [images, setImages] = useState([]);
+  const [isFaceDetect, setIsFaceDetect] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -31,7 +34,7 @@ function DetectionImage() {
     }, 10);
   };
  
-  const detect = async (net,text) => {
+  const detect = async (net) => {
     // Check data is available
     if (typeof imgRef.current !== "undefined" && imgRef.current !== null) {
       // Get Photo Properties
@@ -39,9 +42,9 @@ function DetectionImage() {
       const photoWidth = imgRef.current.width;
       const photoHeight = imgRef.current.height;
 
-      // Set photo width
-      /*photo.current.photo.width = photoWidth;
-      photo.current.photo.height = photoHeight;*/
+      // // Set photo width
+      // photo.current.width = photoWidth;
+      // photo.current.height = photoHeight;
 
       // Set canvas height and width
       canvasRef.current.width = photoWidth;
@@ -49,22 +52,20 @@ function DetectionImage() {
 
       // 4. TODO - Make Detections
       const obj = await net.detect(photo);
-      
       console.log(obj);
 
       // Draw mesh
       const ctx = canvasRef.current.getContext("2d");
-
       // 5. TODO - Update drawing utility
       drawRect(obj, ctx);
-       text=obj[0].class
-      console.log("text",text)
+      //  text=obj[0].class
+      // console.log("text",text)
     }
-   return text
+  
   };
 
 
-  const [isFaceDetect, setIsFaceDetect] = useState(false);
+  
 
   const onChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
